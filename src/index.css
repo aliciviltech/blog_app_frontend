@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root{
+    --primaryColor: #F81539;
+    --secondaryColor: #FC4308;
+    --bgPrimary:#F5F5F5;
+}
+.H1{
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 52px;
+}
+
+.H4{
+    font-weight: 500;
+    font-size: 22px;
+}
+.H5{
+    font-weight: 500;
+    font-size: 16px;
+}
+.H6{
+    font-weight: 400;
+    font-size: 14px;
+}
+.P2{
+    font-size: 14px;
+    color: #3E3232;
+}
+.P3{
+    font-size: 12px;
+    color: #3E3232;
+}
+.black50{
+    color: #757575;
+}
+
+body{
+    overflow-x: hidden;
+}
+
+@media screen and (max-width:640px) {
+    .H4{
+        font-weight: 500;
+        font-size: 16px;
+    }
+}

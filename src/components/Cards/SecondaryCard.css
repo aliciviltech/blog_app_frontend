@@ -1,0 +1,42 @@
+.SecondaryCard{
+    width: 640px;
+    height: 210px;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 12px;
+    box-shadow: 0 0 32px #00000016;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 5px;
+}
+.SecondaryCard > .imageContainer{
+    width: 300px;
+}
+.SecondaryCard .textSide{
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.SecondaryCard .textSide p{
+    display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+}
+
+@media screen and (max-width:640px) {
+.SecondaryCard{
+    width: 100%;
+    height: unset;
+    flex-direction: column;
+    gap: 10px;
+}
+.SecondaryCard > .imageContainer{
+    width: 100%;
+}
+.SecondaryCard .textSide{
+    width: 100%;
+}
+}

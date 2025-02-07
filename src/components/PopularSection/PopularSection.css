@@ -1,0 +1,34 @@
+.slick-track{
+    justify-content: center !important;
+    padding-bottom: 50px;
+}
+.slick-dots{
+    color: red;
+}
+
+.slick-arrow{
+    opacity: 1 !important;
+    background-color: #cac8c8 !important;
+    width: 40px !important;
+    height: 40px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+.slick-arrow::after{
+    color: #000;
+    width: 15px !important;
+    height: 15px !important;
+    border-left-width: 4px !important;
+    border-top-width: 4px !important;
+    inset: unset !important;
+}
+.slick-next{
+    right: 10px !important;
+}
+.slick-prev{
+    left: 3px !important;
+}
+.slick-dots button{
+    background-color: black !important;
+}
