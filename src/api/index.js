@@ -2,8 +2,8 @@ import axios from 'axios'
 
 // const BASE_URL = process.env.BASE_URL
 const apiClient = axios.create({
-    baseURL: 'https://blog-app-backend-pi.vercel.app/',
-    timeout:6000,
+    baseURL: 'http://localhost:8080/',
+    timeout:8000,
     headers:{
         "Content-Type": "application/json"
     }

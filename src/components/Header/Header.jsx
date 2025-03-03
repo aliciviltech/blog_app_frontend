@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { clearUser } from '../../redux/reducers/userReducer';
 import FitButton from '../Buttons/FitButton';
+import PagesDrawer from '../Drawers/PagesDrawer';
+import CategoriesDrawer from '../Drawers/CategoriesDrawer';
 
 const Header = () => {
 
@@ -34,6 +36,15 @@ const Header = () => {
     setUserDrawer(!userDrawer)
   }
 
+  // ================== show drawers ===================
+  const [showDrawer, setShowDrawer] = useState({
+    categories: false,
+    pages: false,
+  })
+  const showDrawersF = (drawer) => {
+    setShowDrawer({ ...showDrawer, [drawer]: !showDrawer[drawer] })
+  }
+
 
   return (
     <div className='Header select-none relative sm:mb-[70px] mb-[30px] lg:mb-[30px] px-2 flex lg:gap-10 justify-between items-center mt-8 max-w-[1300px] mx-auto'>
@@ -47,20 +58,19 @@ const Header = () => {
         </div>
 
         {/* logo */}
-        <div className="logo hidden text-[22px] font-bold sm:block">
+        <div className="logo hidden text-[22px] font-bold sm:block cursor-pointer" onClick={() => navigate('/')}>
           <span className='text-[var(--secondaryColor)]'>Baitul</span>Blog
         </div>
 
         {/* navigation bar */}
-        <div className={`navbar H5 ${showMenu ? 'left-0' : 'left-[-300px]'} rounded-lg flex flex-col transition-all duration-700 delay-0 absolute top-[60px] bg-white shadow-lg lg:static z-10 p-10 lg:p-0 lg:bg-transparent lg:shadow-none  lg:flex-row gap-4 ml-auto`}>
-          <div className='flex items-center'>
-
-            <Link to='/'>Categories</Link>
-            <ChevronDown className='black50' size={20} />
+        <div className={`navbar H5 ${showMenu ? 'left-0' : 'left-[-300px]'} rounded-lg flex flex-col transition-all duration-700 delay-0 absolute top-[60px] bg-white shadow-lg lg:static z-20 p-10 lg:p-0 lg:bg-transparent lg:shadow-none  lg:flex-row gap-4 ml-auto`}>
+          <div className='categories relative flex flex-col  lg:items-center'>
+            <div className='flex items-center cursor-pointer' onClick={() => showDrawersF('categories')}>Categories <ChevronDown className='black50' size={20} /></div>
+            {showDrawer.categories && <CategoriesDrawer/>}
           </div>
-          <div className='flex items-center'>
-            <Link to={''}>Pages</Link>
-            <ChevronDown className='black50' size={20} />
+          <div className='pages relative flex flex-col  lg:items-center'>
+            <div className='flex items-center cursor-pointer' onClick={() => showDrawersF('pages')}>Pages<ChevronDown className='black50' size={20} /></div>
+            {showDrawer.pages && <PagesDrawer />}
           </div>
           <Link to={''}>Contact Us</Link>
           <Link to={''}>About Us</Link>
@@ -89,12 +99,12 @@ const Header = () => {
               <p className='H5'>{activeUserRedux.name}</p>
               <ChevronDown onClick={handleUserDrawer} className='cursor-pointer' />
               <div className={`drawer ${!userDrawer ? 'hidden' : 'flex'} z-10 w-full p-4 bg-white shadow-2xl absolute top-14 left-0 flex-col gap-2 items-center`}>
-                <Link to='/user-dashboard' className='hover:text-primary'>Dashboard</Link>
+                <Link to='/user-dashboard/my-posts' className='hover:text-primary'>Dashboard</Link>
                 <button className='hover:text-primary' onClick={handleLogout}>Logout</button>
               </div>
             </div>
             :
-            <div className="loginBtn w-fit" onClick={()=>navigate('/register-login')}><FitButton text={'Login'} /></div>
+            <div className="loginBtn w-fit" onClick={() => navigate('/register-login?tab=login')}><FitButton text={'Login'} /></div>
 
         }
       </div>

@@ -11,7 +11,7 @@ const activeUserRedux = useSelector(state=>state.userReducer.activeUser);
 
 //   ========================== getting all blogs from redux ========================
   const allBlogsRedux = useSelector(state=>state.blogReducer.allBlogs);
-  const myBlogs = allBlogsRedux.filter((blog)=>blog.user_id===activeUserRedux._id);
+  const myBlogs = allBlogsRedux?.filter((blog)=>blog.user_id===activeUserRedux._id);
   console.log(myBlogs)
   
   
@@ -19,7 +19,7 @@ const activeUserRedux = useSelector(state=>state.userReducer.activeUser);
   return (
     <div className='MyPosts my-10 flex flex-wrap gap-8 justify-center content-start'>
       {
-        myBlogs.length>0 ?
+        myBlogs?.length>0 ?
         myBlogs.map((blog)=>{
           return(
             <div className="blog">

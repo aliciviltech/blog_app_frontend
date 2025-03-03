@@ -4,8 +4,13 @@ import PrimaryCard from '../Cards/PrimaryCard'
 import { Carousel } from 'antd';
 import './PopularSection.css'
 import { AllBlogsData } from '../../utils/AllBlogsData';
+import { useSelector } from 'react-redux';
+import Skeleton from 'react-loading-skeleton';
 
 const PopularSection = () => {
+
+
+  // ============== carousel settings ==================
   const [carouselSetting, setCarouselSetting] = useState({slidesToShow: 1, arrows:true,});
   // const [screen, setScreen] = useState(window.innerWidth);
   const checkScreenF = ()=>{
@@ -23,6 +28,21 @@ const PopularSection = () => {
     checkScreenF()
     window.addEventListener('resize', checkScreenF)
   },[])
+
+
+
+
+   // ================ get all blogs from redux ================
+   const skeletonArray = [1, 2, 3,4];
+   const [allBlogs, setAllBlogs] = useState(skeletonArray)
+   const allBlogsRedux = useSelector(state => state.blogReducer.allBlogs)
+   useEffect(() => {
+     allBlogsRedux?.length > 0 && setAllBlogs(allBlogsRedux)
+   }, [allBlogsRedux])
+ 
+
+
+
   return (
     // py-10 px-10 max-w-[1300px] mx-auto flex justify-center gap-[20px] flex-wrap
     <div className='PopularSection py-12 px-2 sm:px-0 max-w-[1300px] mx-auto'>
@@ -30,9 +50,16 @@ const PopularSection = () => {
         <Carousel className=' flex gap-[20px] flex-wrap justify-center'
         {...carouselSetting}>
         {
-            AllBlogsData.slice(0,4).map((blog, index)=>{
+            allBlogs.map((blog, index)=>{
                 return(
+
+                    blog.title ?
                     <PrimaryCard blog={blog} />
+                    :
+                    <div className='PrimaryCard'>
+                      <Skeleton highlightColor='#cccccc'  containerClassName='skeletonContainer' className='skeleton'/>
+                    </div>
+
                   )
                 })
         }

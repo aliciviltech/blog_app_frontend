@@ -42,6 +42,19 @@ body{
     overflow-x: hidden;
 }
 
+
+.skeletonContainer{
+    width: 100%;
+    height: 100%;
+}
+.skeletonContainer .skeleton{
+    width: 100%;
+    height: 100%;
+}
+
+
+
+
 @media screen and (max-width:640px) {
     .H4{
         font-weight: 500;

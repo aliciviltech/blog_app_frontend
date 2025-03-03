@@ -54,7 +54,7 @@ const UserDashboard = () => {
     // ============ setting active tab from location ===============
     const location = useLocation();
     const nestedRoute = location.pathname.replace('/user-dashboard/', '')
-    const defaultActiveTab = nestedRoute == 'my-posts' ? '1' : nestedRoute == 'add-post' ? '2' : nestedRoute == 'marked-posts' ? '3' : nestedRoute == 'all-posts' ? '4': '';
+    const defaultActiveTab = nestedRoute == 'my-posts' ? '1' : nestedRoute == '' ? '1' : nestedRoute == 'add-post' ? '2' : nestedRoute == 'marked-posts' ? '3' : nestedRoute == 'all-posts' ? '4': '';
     console.log(defaultActiveTab)
 
     // ============ setting location as per active tab ===============
@@ -94,6 +94,10 @@ const UserDashboard = () => {
     return (
         <>
             <Header />
+
+            {
+                activeUserRedux._id ?
+
             <div className='UserDashboard w-[100%] mx-auto'>
 
                 <div className="profileImage relative w-full h-40 flex items-center justify-center">
@@ -112,13 +116,17 @@ const UserDashboard = () => {
 
                 <Tabs
                     onChange={handleTabChange}
-                    defaultActiveKey={defaultActiveTab}
+                    activeKey={defaultActiveTab}
                     items={items}
 
                     className=' flex justify-center items-center'
                 />
 
             </div>
+
+            :
+            <h1 className='text-center mt-20 black50'> Please login to proceed</h1>
+}
         </>
     )
 }

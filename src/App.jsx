@@ -16,6 +16,8 @@ import { Toaster } from 'react-hot-toast'
 import Data from './components/Data/Data'
 import AllPosts from './pages/UserDashboard/AllPosts/AllPosts'
 import BlogDetail from './pages/BlogDetail/BlogDetail'
+import EditPost from './pages/UserDashboard/EditPost/EditPost'
+import CategoryPage from './pages/CategoryPage/CategoryPage'
 
 const App = () => {
   console.log('this is logged in app compoenent')
@@ -39,10 +41,12 @@ const App = () => {
           <Route path='/user-dashboard/add-post' element={<AddPost/>} />
           <Route path='/user-dashboard/marked-posts' element={<MarkedPosts/>} />
           <Route path='/user-dashboard/all-posts' element={<AllPosts/>} />
+          <Route path='/user-dashboard/edit-post' element={<EditPost/>} />
           </Route>
 
         <Route path='/register-login' element={<Register_Login/>} />
         <Route path='/:id' element={<BlogDetail/>} />
+        <Route path='categories/:cat' element={<CategoryPage/>} />
 
         <Route path='*' element={<PageNotFound/>} />
 

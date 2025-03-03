@@ -31,7 +31,7 @@ const Login = () => {
             setUser(response.data.user);
             localStorage.setItem('user', JSON.stringify(response.data.user));
             dispatch(storeUser(response.data.user))
-            navigate('/user-dashboard')
+            navigate('/user-dashboard/my-posts')
 
         }catch(error){
             console.log('Error in login:', error.message)

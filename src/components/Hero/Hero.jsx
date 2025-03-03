@@ -12,7 +12,7 @@ const Hero = () => {
     const allBlogsRedux = useSelector(state => state.blogReducer.allBlogs)
     console.log('first run:', allBlogsRedux)
     useEffect(() => {
-        allBlogsRedux.length>0 && setAllBlogs(allBlogsRedux)
+        allBlogsRedux?.length>0 && setAllBlogs(allBlogsRedux)
     }, [allBlogsRedux])
 
     // =================== navigate to id =================

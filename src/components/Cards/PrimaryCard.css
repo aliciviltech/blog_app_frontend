@@ -17,3 +17,8 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
+
+.PrimaryCard > .imageContainer{
+    width: 300px;
+    height: 200px;
+}

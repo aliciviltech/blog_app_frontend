@@ -16,7 +16,7 @@ const Data = () => {
     const fetchBlogs = async()=>{
         const allBlogs = await getReq('/blogs')
         console.log(allBlogs)
-        dispatch(storeBlogs(allBlogs.data.data))
+        dispatch(storeBlogs(allBlogs?.data.data))
     }
     useEffect(()=>{
         fetchBlogs()
@@ -24,12 +24,12 @@ const Data = () => {
 
     // =================== fetch active user from mongoDB ====================
     const fetchActiveUser = async()=>{
-        const activeUserString = localStorage.getItem('user');
+        const activeUserString = localStorage.getItem('user') || null;
         if(activeUserString && activeUserString !== 'undefined'){
             const activeUser = JSON.parse(activeUserString);
             const user = await getByIdReq(`auth/get_user/${activeUser._id}`)
-            dispatch(storeUser(user.data.activeUser))
-            localStorage.setItem('user',JSON.stringify(user.data.activeUser));
+            user && dispatch(storeUser(user.data.activeUser))
+            user &&  localStorage.setItem('user',JSON.stringify(user.data.activeUser));
             console.log(user)
         }
     }
