@@ -113,7 +113,7 @@ const UserDashboard = () => {
                     </div>
                     <input type="file" className='hidden' accept='image/*' id='fileInput' onChange={updateUserImage} />
                 </div>
-
+                
                 <Tabs
                     onChange={handleTabChange}
                     activeKey={defaultActiveTab}
