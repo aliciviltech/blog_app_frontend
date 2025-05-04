@@ -5,7 +5,7 @@ const CategoriesDrawer = ({closeAllDrawers}) => {
     const catList = ['travel', 'health', 'technology', 'food', 'entertainment']
     return (
         <div className='CategoriesDrawer'>
-            <ul className='lg:absolute top-full left-0 bg-white shadow-lg p-4 flex flex-col gap-2'>
+            <ul className='lg:absolute top-full left-0 bg-white m-2 border-l border-gray-500 lg:border-none p-4 flex flex-col gap-2'>
                 {
                     catList.map((cat)=>{
                         return(

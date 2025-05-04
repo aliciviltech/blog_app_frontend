@@ -1,4 +1,4 @@
-import { ChevronDown, MenuIcon, Search } from 'lucide-react'
+import { ChevronDown, CrossIcon, MenuIcon, Search } from 'lucide-react'
 import React, { useEffect, useRef, useState } from 'react'
 import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
@@ -48,8 +48,10 @@ const Header = () => {
   // menu bar
   const [showMenu, setShowMenu] = useState(false);
   const handleShowMenu = () => {
+    console.log('function running', showMenu)
     setShowMenu(!showMenu);
   }
+  console.log(showMenu)
   // navigation anchor drawerrs
   const [showDrawer, setShowDrawer] = useState({
     categories: false,
@@ -102,41 +104,45 @@ const Header = () => {
 
   return (
     <div className='Header select-none relative sm:mb-[70px] mb-[30px] lg:mb-[30px] px-2 flex lg:gap-10 justify-between items-center mt-8 max-w-[1300px] mx-auto'>
-
+      
       {/* ======================== left side =============================== */}
-      <div className="leftSide grow-[1] lg:w-[50%] flex gap-6 items-center">
+      <div className="leftSide lg:w-[50%] flex gap-6 items-center">
 
         {/* menubars */}
         <div ref={menuBarsRef} className="menuBars lg:hidden" onClick={handleShowMenu}>
-          <MenuIcon />
+            <MenuIcon/>
         </div>
 
         {/* logo */}
-        <div className="logo hidden text-[22px] font-bold sm:block cursor-pointer" onClick={() => navigate('/')}>
+        <div className="logo text-[22px] font-bold sm:block cursor-pointer" onClick={() => navigate('/')}>
           <span className='text-[var(--secondaryColor)]'>Baitul</span>Blog
         </div>
 
         {/* navigation bar */}
-        <div ref={drawerRef} className={`navbar H5 ${showMenu ? 'left-0' : 'left-[-300px]'} rounded-lg flex flex-col transition-all duration-700 delay-0 absolute top-[60px] bg-white shadow-lg lg:static z-20 p-10 lg:p-0 lg:bg-transparent lg:shadow-none  lg:flex-row gap-4 ml-auto`}>
+        <div ref={drawerRef} className={`navbar H5 ${showMenu ? 'left-0' : 'left-[-100%]'} rounded-lg flex flex-col transition-all duration-700  absolute top-[60px] bg-white shadow-lg w-full min-h-[calc(100vh-90px)] sm:w-[300px] lg:static lg:w-fit lg:min-h-fit z-20 p-10 lg:p-0 lg:bg-transparent lg:shadow-none  lg:flex-row gap-4 ml-auto `}>
+
           <div className='categories relative flex flex-col  lg:items-center'>
             <div className='flex items-center cursor-pointer' onClick={() => showDrawersF('categories')}>Categories <ChevronDown className='black50' size={20} /></div>
             {showDrawer.categories && <CategoriesDrawer closeAllDrawers={closeAllDrawers} />}
           </div>
+
           <div className='pages relative flex flex-col  lg:items-center'>
             <div className='flex items-center cursor-pointer' onClick={() => showDrawersF('pages')}>Pages<ChevronDown className='black50' size={20} /></div>
             {showDrawer.pages && <PagesDrawer />}
           </div>
+
           <Link to={''}>Contact Us</Link>
           <Link to={''}>About Us</Link>
         </div>
       </div>
 
       {/* ======================== right side =============================== */}
-      <div className="rightSide grow-[9] sm:grow-[0] lg:w-[40%] flex gap-6 items-center justify-between">
+      <div className="rightSide sm:grow-[0] lg:w-[40%] flex gap-6 items-center justify-between">
 
         {/* search bar */}
-        
+        <div className="search hidden sm:block">
         <SearchComponent/>
+        </div>
 
 
         {/* user info */}

@@ -158,15 +158,19 @@ const FormComponent = ({ type, blogData }) => {
       <form className='flex my-4 flex-col gap-2' >
         {
           type == 'edit' &&
+          <>
+          <label className='opacity-[0.7]'>Section:</label>
           <select {...register("section", { required: true })} className='p-2 border border-gray-300 rounded-md'>
             <option value="" disabled selected>Select section</option>
             <option value="hero">Hero</option>
             <option value="new">New Posts</option>
             <option value="popular">Popular</option>
           </select>
+          </>
         }
-
+        <label className='opacity-[0.7]'>Author Name:</label>
         <input {...register("user_name", { required: true })} placeholder='Enter your name' className='p-2 border border-gray-300 rounded-md' />
+        <label className='opacity-[0.7]'>Blog Category:</label>
         <select {...register("category", { required: true })} className='p-2 border border-gray-300 rounded-md'>
           <option value="" disabled selected>Select blog category</option>
           <option value="travel">Travel</option>
@@ -177,6 +181,7 @@ const FormComponent = ({ type, blogData }) => {
           <option value="education">Education</option>
           <option value="entertainment">Entertainment</option>
         </select>
+        <label className='opacity-[0.7]'>Blog Title:</label>
         <input {...register("title", { required: true })} placeholder='Enter blog title' className='p-2 border border-gray-300 rounded-md' />
         <p>Write a blog introduction, which will appear in thumbnail/preview of blog. {`(minimum 200 characters long.)`} </p>
         <textarea {...register("summary", { required: true })} minLength={200} placeholder='wirte a blog summary/introduction/context' className='resize-none p-2 border border-gray-300 rounded-md' onChange={handleSummaryCount} ></textarea>
@@ -186,7 +191,7 @@ const FormComponent = ({ type, blogData }) => {
           type == 'edit' ?
             <>
               <img src={thumbnailUrl ? thumbnailUrl : thumbnail} alt="thumbnail" className='w-28 h-28 object-contain' />
-              <label for='imageInput' className='bg-gray-400 rounded-sm px-2 py-1 w-fit'>Change thumbnail image</label>
+              <label for='imageInput' className='bg-gray-400 rounded-sm px-2 py-1 w-fit cursor-pointer'>Change thumbnail image</label>
               <input type="file" {...register("thumbnailImage")} id='imageInput' className='hidden' onChange={processThumbnailURL} />
             </>
             :
