@@ -16,6 +16,7 @@ const NewPosts = () => {
   useEffect(() => {
     allBlogsRedux?.length > 0 && setAllBlogs(allBlogsRedux)
   }, [allBlogsRedux])
+  console.log('all new posts blogs from redux', allBlogsRedux)
 
 
 

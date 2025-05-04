@@ -10,7 +10,8 @@ const Hero = () => {
     const skeletonArray = [1, 2, 3];
     const [allBlogs, setAllBlogs] = useState(skeletonArray)
     const allBlogsRedux = useSelector(state => state.blogReducer.allBlogs)
-    console.log('first run:', allBlogsRedux)
+  console.log('all hero blogs from redux', allBlogsRedux)
+
     useEffect(() => {
         allBlogsRedux?.length>0 && setAllBlogs(allBlogsRedux)
     }, [allBlogsRedux])

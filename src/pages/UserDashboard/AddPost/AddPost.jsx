@@ -83,7 +83,7 @@ const AddPost = () => {
 
 
   return (
-    <div className='AddPost py-12'>
+    <div className='AddPost py-12 px-4'>
       Add Post componenet
 
       <form className='flex my-4 flex-col gap-2' >
