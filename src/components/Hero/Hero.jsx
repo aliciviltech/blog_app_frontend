@@ -4,16 +4,18 @@ import 'react-loading-skeleton/dist/skeleton.css'
 import './Hero.css'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
+import PrimaryLoader from '../Loader/PrimaryLoader'
+import { Carousel } from 'antd'
 
 const Hero = () => {
     // ================ get all blogs from redux ================
     const skeletonArray = [1, 2, 3];
     const [allBlogs, setAllBlogs] = useState(skeletonArray)
     const allBlogsRedux = useSelector(state => state.blogReducer.allBlogs)
-  console.log('all hero blogs from redux', allBlogsRedux)
+    console.log('all hero blogs from redux', allBlogsRedux)
 
     useEffect(() => {
-        allBlogsRedux?.length>0 && setAllBlogs(allBlogsRedux)
+        allBlogsRedux?.length > 0 && setAllBlogs(allBlogsRedux)
     }, [allBlogsRedux])
 
     // =================== navigate to id =================
@@ -26,29 +28,64 @@ const Hero = () => {
     return (
         <>
             <div className='Hero'>
-
                 {
-                    allBlogs.slice(0, 3).map((blog) => {
-                        console.log("Blog Title:", blog.title);
-
-                        return (
-                            <div className="imageContainer cursor-pointer" onClick={ () => {blog.title && navigateToId(blog._id)}}>
-                                {
-                                    blog.title ?
-                                    <>
-                                        <img className='image' src={blog.thumbnail} alt='image1' />
-                                        <div className="text">
-                                            <h3 className='H4'>{blog.title}</h3>
-                                            <p>{blog.summary}...</p>
-                                        </div>
-                                    </>
-                                    :
-                                    <Skeleton highlightColor='#cccccc'  containerClassName='skeletonContainer' className='skeleton' />
-                                }
-                            </div>
-                        )
-                    })
+                    allBlogs[0].title == undefined && <PrimaryLoader />
                 }
+
+
+                <div className="heroSection1">
+                    {
+                        allBlogs.slice(0, 2).map((blog) => {
+                            return (
+                                <div className="imageContainer cursor-pointer" onClick={() => { blog.title && navigateToId(blog._id) }}>
+                                    {
+                                        blog.title ?
+                                            <>
+                                                <img className='image' src={blog.thumbnail} alt='image1' />
+                                                <span className="text">
+                                                    <h3 className='H4'>{blog.title}</h3>
+                                                    <p>{blog.summary}...</p>
+                                                </span>
+                                            </>
+                                            :
+                                            <Skeleton highlightColor='#cccccc' containerClassName='skeletonContainer' className='skeleton' />
+                                    }
+                                </div>
+                            )
+                        })
+                    }
+                </div>
+
+                <div className="heroSection2">
+                    <Carousel className='main-carousel' arrows infinite={true} autoplay pauseOnHover={false} slidesToShow={1}>
+
+                        {
+                            allBlogs.slice(2).map((blog) => {
+
+                                if (blog.section == 'hero') {
+                                    return (
+                                            <div className="imageContainer cursor-pointer" onClick={() => { blog.title && navigateToId(blog._id) }}>
+                                                {
+                                                    blog.title ?
+                                                        <>
+                                                            <img className='image ' src={blog.thumbnail} alt='image1' />
+                                                            <span className="text">
+                                                                <h3 className='H4'>{blog.title}</h3>
+                                                                <p>{blog.summary}...</p>
+                                                            </span>
+                                                        </>
+                                                        :
+                                                        <Skeleton highlightColor='#cccccc' containerClassName='skeletonContainer' className='skeleton' />
+                                                }
+                                            </div>
+                                    )
+                                }
+                            })
+                        }
+
+                    </Carousel>
+                </div>
+
             </div>
 
         </>

@@ -8,8 +8,9 @@ import { storeBlogs } from '../../redux/reducers/blogReducer';
 import { postReq, putReq } from '../../api/axios';
 
 
-const FormComponent = ({ type, blogData }) => {
+const FormComponent = ({ type, blogData, setShowForm }) => {
   const { user_name, category, summary, thumbnail, blog_content, blog_comments, title, updatedAt, user_id, user_image, _id } = blogData;
+  const [mainButtonText, setMainButtonText] = useState(type=='edit'? "Update" : "Post")
 
   const dispatch = useDispatch()
 
@@ -71,8 +72,9 @@ const FormComponent = ({ type, blogData }) => {
     })
   }
 
-  // post blog on data base
+  // ========================== post blog on data base ============================
   const postBlog = async (data) => {
+    setMainButtonText('Loading...')
     const finalBlogData = {
       ...data,
       blog_content: editorRef.current.getContent(),
@@ -81,12 +83,13 @@ const FormComponent = ({ type, blogData }) => {
       thumbnail: thumbnailUrl,
       user_image: activeUserRedux.user_image,
     }
-    // post blog on data base
+    // post api
     try {
       const response = await postReq('/blogs/post-blog', finalBlogData);
       dispatch(storeBlogs([...allBlogsRedux, finalBlogData]))
       console.log(response)
       toast.success('Blog posted successfully')
+      setShowForm(false) 
     } catch (error) {
       toast.error(error.message)
       console.log('Error in posting blog at AddPost: ', error)
@@ -98,8 +101,9 @@ const FormComponent = ({ type, blogData }) => {
     })();
   };
 
-  // update blog on data base
+  // =============================== update blog on data base ===========================
   const updateBlog = async (data) => {
+    setMainButtonText('Loading...')
     const finalBlogData = {
       ...data,
       blog_content: editorRef.current.getContent(),
@@ -108,16 +112,18 @@ const FormComponent = ({ type, blogData }) => {
       thumbnail:  thumbnail,
       user_image: activeUserRedux.user_image,
     }
-    // post blog on data base
+    // update api
     try {
       const response = await putReq(`/blogs/update-blog/${_id}`, finalBlogData);
       // dispatch(storeBlogs([...allBlogsRedux, finalBlogData]))
-      // console.log(response)
+      console.log(response)
       toast.success('Blog updated successfully')
+      setShowForm(false) 
     } catch (error) {
       toast.error(error.message)
       console.log('Error in updating blog: ', error)
     }
+    console.log(finalBlogData)
   }
   const updatePost = () => {
     handleSubmit(async (data) => {
@@ -235,11 +241,11 @@ const FormComponent = ({ type, blogData }) => {
       {
         type == 'edit' ?
           <div className="submitButton mt-4" onClick={updatePost}>
-            <FullButton text='Update'/>
+            <FullButton text={mainButtonText}/>
           </div>
           :
           <div className="submitButton mt-4" onClick={submitPost}>
-            <FullButton text='Post' />
+            <FullButton text={mainButtonText} />
           </div>
       }
 

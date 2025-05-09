@@ -41,6 +41,7 @@ const putReq = async(path, data)=>{
     try{
         const response = await apiClient.put(path,data);
         console.log(response)
+        return response
     } catch(error){
         throw new Error(`Error in axios putReq: ${error.response?.data.message}`);        
     }

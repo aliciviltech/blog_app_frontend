@@ -104,13 +104,13 @@ const Header = () => {
 
   return (
     <div className='Header select-none relative sm:mb-[70px] mb-[30px] lg:mb-[30px] px-2 flex lg:gap-10 justify-between items-center mt-8 max-w-[1300px] mx-auto'>
-      
+
       {/* ======================== left side =============================== */}
       <div className="leftSide lg:w-[50%] flex gap-6 items-center">
 
         {/* menubars */}
         <div ref={menuBarsRef} className="menuBars lg:hidden" onClick={handleShowMenu}>
-            <MenuIcon/>
+          <MenuIcon />
         </div>
 
         {/* logo */}
@@ -119,7 +119,10 @@ const Header = () => {
         </div>
 
         {/* navigation bar */}
-        <div ref={drawerRef} className={`navbar H5 ${showMenu ? 'left-0' : 'left-[-100%]'} rounded-lg flex flex-col transition-all duration-700  absolute top-[60px] bg-white shadow-lg w-full min-h-[calc(100vh-90px)] sm:w-[300px] lg:static lg:w-fit lg:min-h-fit z-20 p-10 lg:p-0 lg:bg-transparent lg:shadow-none  lg:flex-row gap-4 ml-auto `}>
+        <div ref={drawerRef} className={
+          `navbar H5 ${showMenu ? 'left-0 opacity-100' : 'left-[-100%] opacity-0 '} rounded-lg flex flex-col gap-4 transition-all duration-700  absolute top-[60px] bg-white shadow-lg w-full min-h-[calc(100vh-90px)] z-20 p-10  ml-auto 
+          sm:w-[300px] 
+          lg:static lg:opacity-100 lg:w-fit lg:min-h-fit lg:p-0 lg:bg-transparent lg:shadow-none  lg:flex-row  `}>
 
           <div className='categories relative flex flex-col  lg:items-center'>
             <div className='flex items-center cursor-pointer' onClick={() => showDrawersF('categories')}>Categories <ChevronDown className='black50' size={20} /></div>
@@ -141,7 +144,7 @@ const Header = () => {
 
         {/* search bar */}
         <div className="search hidden sm:block">
-        <SearchComponent/>
+          <SearchComponent />
         </div>
 
 

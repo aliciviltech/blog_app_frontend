@@ -8,26 +8,42 @@
     height: 450px;
 }
 
-.Hero .imageContainer {
-    flex: 1;
-    /* width: 200px; */
-    /* height: 450px; */
-    position: relative;
+.Hero .heroSection1 {
     display: flex;
     justify-content: center;
+    gap: 15px;
+    width: 50%;
 }
-.Hero .skeletonContainer{
+
+.Hero .heroSection2 {
+    width: 50%;
+    /* display: flex; */
+    /* justify-content: center; */
+}
+
+.Hero .heroSection1>div {
+    width: 50%;
+}
+
+.Hero .imageContainer {
+    /* width: 200px; */
     width: 100%;
     height: 100%;
+    position: relative;
+    display: flex !important;
+    justify-content: center;
 }
-.Hero .skeletonContainer .skeleton{
+
+.Hero .skeletonContainer {
     width: 100%;
     height: 100%;
 }
 
-.Hero .imageContainer:nth-child(3) {
-    flex: 2;
+.Hero .skeletonContainer .skeleton {
+    width: 100%;
+    height: 100%;
 }
+
 
 .Hero .imageContainer p {
     /* display: none; */
@@ -47,6 +63,7 @@
 }
 
 .Hero .text {
+    height: fit-content;
     padding: 10px;
     position: absolute;
     bottom: 10px;
@@ -59,30 +76,43 @@
     gap: 10px;
 }
 
+.Hero .ant-carousel,
+.Hero .slick-list,
+.Hero .ant-carousel div {
+    height: 100% !important;
+}
+
+
+
 @media screen and (max-width:1024px) {
     .Hero {
         height: 50vh;
     }
 
-    .Hero .imageContainer {
-        flex: unset;
+    .Hero .heroSection1 {
         display: none;
     }
 
-    .Hero .imageContainer:nth-child(3) {
-        flex: unset;
+    .Hero .heroSection2 {
         width: 100%;
-        display: flex;
+        /* display: flex; */
     }
+
+    .Hero .imageContainer {
+        width: 100%;
+    }
+
 }
 
 @media screen and (max-width:640px) {
-    .Hero{
+    .Hero {
         padding: 0;
     }
-    .Hero .image{
+
+    .Hero .image {
         border-radius: 0;
     }
+
     .Hero .imageContainer p {
         /* display: none; */
         font-size: 14px;

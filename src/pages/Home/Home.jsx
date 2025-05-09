@@ -4,6 +4,7 @@ import Header from '../../components/Header/Header'
 import NewPosts from '../../components/NewPosts/NewPosts'
 import PopularSection from '../../components/PopularSection/PopularSection'
 import Data from '../../components/Data/Data'
+import PrimaryLoader from '../../components/Loader/PrimaryLoader'
 
 const Home = () => {
   return (

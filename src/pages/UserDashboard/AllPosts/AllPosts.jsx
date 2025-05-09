@@ -51,7 +51,7 @@ const AllPosts = () => {
 
               <FitButton text={`Close`} />
             </div>
-            <FormComponent type={'edit'} blogData={blogData} />
+            <FormComponent type={'edit'} blogData={blogData} setShowForm={setShowForm} />
           </div>
         </div>
       }
