@@ -3,7 +3,6 @@ import React from 'react'
 const AuthorTag = ({authorImage=null, authorName, date}) => {
     const colors = ["#eb4034", "#520a05", "#076ca3", "#1f7d5f", "#ad1a9f", "#ad971a"];
     const randomColor = colors[Math.floor(Math.random()*6)]
-    console.log(randomColor)
     return (
         <div className='AuthorTag bg-[var(--bgPrimary)] p-2.5 rounded-lg flex gap-2.5'>
             <div className="imageContainer">
@@ -16,7 +15,7 @@ const AuthorTag = ({authorImage=null, authorName, date}) => {
             </div>
             <div className="text flex flex-col gap-1">
                 <h1 className='H6'>{authorName}</h1>
-                <p className='P3'>August 18 , 2022</p>
+                <p className='P3'>{date}</p>
             </div>
         </div>
     )

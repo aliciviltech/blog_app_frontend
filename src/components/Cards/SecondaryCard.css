@@ -35,6 +35,7 @@
 }
 .SecondaryCard > .imageContainer{
     width: 100%;
+    height: 300px;
 }
 .SecondaryCard .textSide{
     width: 100%;

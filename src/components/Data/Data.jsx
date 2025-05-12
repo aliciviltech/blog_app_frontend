@@ -6,6 +6,8 @@ import { getByIdReq, getReq } from '../../api/axios'
 
 const Data = () => {
   
+    console.log('Checking Data component')
+
     // ======================= redux functions ===========================
     const dispatch = useDispatch()
     const AllBlogsRedux = useSelector(state=>state.blogReducer.allBlogs);
@@ -15,11 +17,13 @@ const Data = () => {
     // =================== fetch all blogs from mongoDB ====================
     const fetchBlogs = async()=>{
         const allBlogs = await getReq('/blogs')
-        console.log(allBlogs)
         dispatch(storeBlogs(allBlogs?.data.data))
     }
     useEffect(()=>{
-        fetchBlogs()
+        if(AllBlogsRedux.length==0 || activeUserRedux=={}){
+            fetchBlogs()
+            console.log('data component fetch block')
+        }
     },[])
 
     // =================== fetch active user from mongoDB ====================
@@ -30,15 +34,12 @@ const Data = () => {
             const user = await getByIdReq(`auth/get_user/${activeUser._id}`)
             user && dispatch(storeUser(user.data.activeUser))
             user &&  localStorage.setItem('user',JSON.stringify(user.data.activeUser));
-            console.log(user)
         }
     }
     useEffect(()=>{
         fetchActiveUser()
     },[])    
     
-    console.log('this is data component')
-  
     return (<></>)
 }
 

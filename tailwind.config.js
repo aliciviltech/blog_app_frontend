@@ -12,6 +12,9 @@ export default {
       boxShadow:{
         'shadow-pr':'0 0 10px #757575'
       },
+      fontFamily:{
+        poppins: 'poppins-light'
+      }
     },
   },
   plugins: [],

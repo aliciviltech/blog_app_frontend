@@ -9,6 +9,8 @@ import { clearUser, storeUser } from '../../redux/reducers/userReducer';
 
 const Login = () => {
 
+    const [mainBtn, setMainBtn] = useState('Login')
+
     // =========== navigate =========
     const navigate = useNavigate();
    
@@ -23,10 +25,13 @@ const Login = () => {
     
     // ============ Api ==============
     const handleLogin = async(data)=>{
+        setMainBtn('Loading...')
         try{
             const response = await postReq('/auth/login', data)
             toast.success('Login successful')
             console.log('login success')
+            setMainBtn('Login')
+
     
             setUser(response.data.user);
             localStorage.setItem('user', JSON.stringify(response.data.user));
@@ -67,7 +72,7 @@ const Login = () => {
                     <input {...register("email")}  placeholder='Email' className='p-2 border border-gray-300 rounded-md' />
                     <input {...register("password")} placeholder='Password' type='password' className='p-2 border border-gray-300 rounded-md' />
                     {/* {errors.exampleRequired && <span>This field is required</span>} */}
-                    <input type="submit" value={'Login'} className='cursor-pointer bg-[var(--primaryColor)] p-2 rounded-md text-white border-none' />
+                    <input type="submit" value={mainBtn} className='cursor-pointer bg-[var(--primaryColor)] p-2 rounded-md text-white border-none' />
                     </form>
                 }
 

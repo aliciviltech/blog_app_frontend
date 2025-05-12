@@ -5,6 +5,9 @@ import SecondaryCard from '../../../components/Cards/SecondaryCard';
 import FitButton from '../../../components/Buttons/FitButton';
 import { Form, useNavigate } from 'react-router';
 import FormComponent from '../../../components/Form/Form';
+import { deleteReq } from '../../../api/axios';
+import toast from 'react-hot-toast';
+import DeletingLoader from '../../../components/Loader/DeletingLoader';
 
 const AllPosts = () => {
 
@@ -13,15 +16,28 @@ const AllPosts = () => {
   // ================== edit blog ====================
   const [showForm, setShowForm] = useState(false)
   const [blogData, setBlogData] = useState()
-  
-  const handleEdit = (blog)=>{
+  const [deleting, setDeleting] = useState(false)
+
+  const handleEdit = (blog) => {
     setShowForm(true);
     setBlogData(blog)
   }
 
+  const handleDelete = async (id) => {
+    setDeleting(true)
+    try {
+      await deleteReq(`/blogs/delete-blog/${id}`)
+      toast.success(`Blog deleted`)
+      setDeleting(false)
+    } catch (error) {
+      toast.error(`Error deleting blog: ${error}`)
+      setDeleting(false)
+      console.log(error)
+    }
+  }
+
   // get blog data from redux
   const allBlogsRedux = useSelector(state => state.blogReducer.allBlogs);
-  console.log(allBlogsRedux)
   return (
     <>
       <div className='AllPosts my-10 flex flex-wrap gap-8 justify-center'>
@@ -31,12 +47,15 @@ const AllPosts = () => {
               <div className="blog relative">
                 <SecondaryCard blog={blog} />
                 <div className="controls absolute bottom-4 right-2 flex gap-2 bg-red-500/30 px-2 py-1 rounded-md">
-                  <div className="delete"><Trash2 className='cursor-pointer hover:text-[var(--primaryColor)]' /> </div>
+                  <div className="delete" onClick={()=>handleDelete(blog._id)}><Trash2 className='cursor-pointer hover:text-[var(--primaryColor)]' /> </div>
                   <div className="edit" onClick={() => handleEdit(blog)}><Pencil className='cursor-pointer hover:text-[var(--primaryColor)]' /></div>
                 </div>
               </div>
             )
           })
+        }
+        {
+          deleting && <DeletingLoader />
         }
       </div>
 

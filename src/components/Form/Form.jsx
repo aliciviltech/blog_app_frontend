@@ -181,7 +181,7 @@ const FormComponent = ({ type, blogData, setShowForm }) => {
           <option value="" disabled selected>Select blog category</option>
           <option value="travel">Travel</option>
           <option value="health">Health</option>
-          <option value="health">Food</option>
+          <option value="food">Food</option>
           <option value="technology">Technology</option>
           <option value="fitness">Fitness</option>
           <option value="education">Education</option>

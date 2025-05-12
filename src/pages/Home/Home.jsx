@@ -5,6 +5,7 @@ import NewPosts from '../../components/NewPosts/NewPosts'
 import PopularSection from '../../components/PopularSection/PopularSection'
 import Data from '../../components/Data/Data'
 import PrimaryLoader from '../../components/Loader/PrimaryLoader'
+import Weather from '../../components/Weather/Weather'
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
         <Header/>
         <Hero/>
         <NewPosts/>
+        <Weather/>
         <PopularSection/>
     </div>
   )

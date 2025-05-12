@@ -11,6 +11,8 @@ import { storeBlogs } from '../../../redux/reducers/blogReducer';
 const AddPost = () => {
   const dispatch = useDispatch()
 
+  const [mainBtn, setMainBtn]= useState('Post')
+
   // thumbnail image 
   const [thumbnailUrl, setThumbnailUrl] = useState('')
 
@@ -41,8 +43,8 @@ const AddPost = () => {
         const text = editorRef.current.getContent({ format: 'text' })
         let totalWords = text.trim().split(/\s+/).length;
 
-        if(data.summary.trim().length<200){
-          toast.error('Blog summary shall be atleast 200 characters long')
+        if(data.summary.trim().length<120){
+          toast.error('Blog summary shall be atleast 120 characters long')
         } else if(totalWords<100){
           toast.error('Blog shall not be less than 100 words')
         } else{
@@ -56,10 +58,12 @@ const AddPost = () => {
           }
           // post blog on data base
           try{
+            setMainBtn('Loading...')
             const response = await postReq('/blogs/post-blog',saveBlog);
             dispatch(storeBlogs([...allBlogsRedux,saveBlog]))
             console.log(response) 
             toast.success('Blog posted successfully')
+            setMainBtn('Post')
           }catch(error){
             toast.error(error.message)
             console.log('Error in posting blog at AddPost: ',error)
@@ -92,15 +96,15 @@ const AddPost = () => {
           <option value="" disabled selected>Select blog category</option>
           <option value="travel">Travel</option>
           <option value="health">Health</option>
-          <option value="health">Food</option>
+          <option value="food">Food</option>
           <option value="technology">Technology</option>
           <option value="fitness">Fitness</option>
           <option value="education">Education</option>
           <option value="entertainment">Entertainment</option>
         </select>
         <input {...register("title", { required: true })} placeholder='Enter blog title' className='p-2 border border-gray-300 rounded-md' />
-        <p>Write a blog introduction, which will appear in thumbnail/preview of blog. {`(minimum 200 characters long.)`} </p>
-        <textarea {...register("summary", { required: true })} minLength={200} placeholder='wirte a blog summary/introduction/context' className='resize-none p-2 border border-gray-300 rounded-md' onChange={handleSummaryCount} ></textarea>
+        <p>Write a blog introduction, which will appear in thumbnail/preview of blog. {`(minimum 120 characters long.)`} </p>
+        <textarea {...register("summary", { required: true })} minLength={120} placeholder='wirte a blog summary/introduction/context' className='resize-none p-2 border border-gray-300 rounded-md' onChange={handleSummaryCount} ></textarea>
         <p className='text-right text-[12px] m-0 p-0 ' >Summary letter count: {summaryCount}</p>
         <p>Upload thumbnail image</p>
         <input type="file" {...register("thumbnailImage", { required: true })} onChange={processThumbnailURL} />
@@ -134,7 +138,7 @@ const AddPost = () => {
         }}
       />
       <div className="submitButton mt-4" onClick={submitForm}>
-        <FullButton text={'Post'} />
+        <FullButton text={mainBtn} />
       </div>
 
 

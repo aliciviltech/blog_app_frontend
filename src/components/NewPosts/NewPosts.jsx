@@ -13,10 +13,10 @@ const NewPosts = () => {
   const skeletonArray = [1, 2, 3,4];
   const [allBlogs, setAllBlogs] = useState(skeletonArray)
   const allBlogsRedux = useSelector(state => state.blogReducer.allBlogs)
+  const newPosts = [...allBlogsRedux].sort((a,b)=> new Date(b.createdAt) - new Date(a.createdAt))
   useEffect(() => {
-    allBlogsRedux?.length > 0 && setAllBlogs(allBlogsRedux)
+    newPosts?.length > 0 && setAllBlogs(newPosts)
   }, [allBlogsRedux])
-  console.log('all new posts blogs from redux', allBlogsRedux)
 
 
 
@@ -25,12 +25,12 @@ const NewPosts = () => {
       <h1 className='H4 my-2'>New Posts</h1>
       <div className='  flex flex-wrap justify-center gap-5 '>
         {
-          allBlogs.map((blog) => {
+          allBlogs.slice(0,4).map((blog,index) => {
             return (
               blog.title ?
-              <SecondaryCard blog={blog} />
+              <SecondaryCard key={index} blog={blog} />
               :
-              <div className='SecondaryCard'>
+              <div key={index} className='SecondaryCard'>
                 <Skeleton highlightColor='#cccccc'  containerClassName='skeletonContainer' className='skeleton'/>
               </div>
             )

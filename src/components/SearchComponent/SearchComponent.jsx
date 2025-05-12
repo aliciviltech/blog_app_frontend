@@ -7,7 +7,6 @@ const SearchComponent = () => {
   // ======================== redux values =======================
   const allBlogsRedux = useSelector(state => state.blogReducer.allBlogs)
   const dispatch = useDispatch()
-  console.log(allBlogsRedux)
 
 
 

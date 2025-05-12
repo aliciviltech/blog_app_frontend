@@ -33,7 +33,9 @@ const deleteReq = async(path)=>{
         const response = await apiClient.delete(path);
         return response;
     } catch(error){
-        console.log(error)
+        console.log(error.message)
+        throw new Error(`Error in axios: ${error}`);
+        
     }
 }
 

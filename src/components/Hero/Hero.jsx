@@ -12,8 +12,6 @@ const Hero = () => {
     const skeletonArray = [1, 2, 3];
     const [allBlogs, setAllBlogs] = useState(skeletonArray)
     const allBlogsRedux = useSelector(state => state.blogReducer.allBlogs)
-    console.log('all hero blogs from redux', allBlogsRedux)
-
     useEffect(() => {
         allBlogsRedux?.length > 0 && setAllBlogs(allBlogsRedux)
     }, [allBlogsRedux])
@@ -21,7 +19,7 @@ const Hero = () => {
     // =================== navigate to id =================
     const navigate = useNavigate()
     const navigateToId = (id) => {
-        navigate(`/${id}`)
+        navigate(`/read-blog?id=${id}`)
     }
 
 
@@ -35,9 +33,9 @@ const Hero = () => {
 
                 <div className="heroSection1">
                     {
-                        allBlogs.slice(0, 2).map((blog) => {
+                        allBlogs.slice(0, 2).map((blog, index) => {
                             return (
-                                <div className="imageContainer cursor-pointer" onClick={() => { blog.title && navigateToId(blog._id) }}>
+                                <div key={index} className="imageContainer cursor-pointer" onClick={() => { blog.title && navigateToId(blog._id) }}>
                                     {
                                         blog.title ?
                                             <>
@@ -60,11 +58,11 @@ const Hero = () => {
                     <Carousel className='main-carousel' arrows infinite={true} autoplay pauseOnHover={false} slidesToShow={1}>
 
                         {
-                            allBlogs.slice(2).map((blog) => {
+                            allBlogs.slice(2).map((blog,index) => {
 
                                 if (blog.section == 'hero') {
                                     return (
-                                            <div className="imageContainer cursor-pointer" onClick={() => { blog.title && navigateToId(blog._id) }}>
+                                            <div key={index} className="imageContainer cursor-pointer" onClick={() => { blog.title && navigateToId(blog._id) }}>
                                                 {
                                                     blog.title ?
                                                         <>
