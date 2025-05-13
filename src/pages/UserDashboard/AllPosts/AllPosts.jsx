@@ -46,7 +46,7 @@ const AllPosts = () => {
             return (
               <div className="blog relative">
                 <SecondaryCard blog={blog} />
-                <div className="controls absolute bottom-4 right-2 flex gap-2 bg-red-500/30 px-2 py-1 rounded-md">
+                <div className="controls absolute bottom-6 right-16 flex gap-4 bg-red-500/30 px-2 py-1 rounded-md">
                   <div className="delete" onClick={()=>handleDelete(blog._id)}><Trash2 className='cursor-pointer hover:text-[var(--primaryColor)]' /> </div>
                   <div className="edit" onClick={() => handleEdit(blog)}><Pencil className='cursor-pointer hover:text-[var(--primaryColor)]' /></div>
                 </div>

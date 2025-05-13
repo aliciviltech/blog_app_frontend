@@ -26,14 +26,14 @@ const CategoriesList = () => {
         <>
             <Header />
             <Breadcrumb />
-            <div className='flex flex-wrap justify-center'>
+            <div className='flex flex-wrap justify-center gap-[40px]'>
                 {   
                     categoriesList.length>0 ?
                     categoriesList.map((cat,index) => {
                         return (
-                            <div key={index} className='PrimaryCard max-w-[300px] cursor-pointer' onClick={() => navigate(`/categories/${cat}`)}>
-                                <div className="imageContainer w-full text-center">
-                                    <img className='image w-full h-full object-cover rounded-lg' src={categoryImages[cat]} alt='cardImage' />
+                            <div key={index} className=' w-[300px]  cursor-pointer' onClick={() => navigate(`/categories/${cat}`)}>
+                                <div className="w-[100%] h-[200px] text-center">
+                                    <img className='image w-full h-full object-cover rounded-lg' src={`/images/categories/${cat}.jpg`} alt='cardImage' />
                                 </div>
                                 <h1 className='H5'>{cat.toUpperCase()}</h1>
                                 {/* <p className='P2'>{blog.summary}</p> */}

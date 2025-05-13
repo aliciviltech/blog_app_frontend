@@ -14,7 +14,7 @@ const NewPosts = () => {
   const skeletonArray = [1, 2, 3, 4];
   const [allBlogs, setAllBlogs] = useState(skeletonArray)
   const allBlogsRedux = useSelector(state => state.blogReducer.allBlogs)
-  const newPosts = [...allBlogsRedux].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+  const newPosts = [...allBlogsRedux]?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
   useEffect(() => {
     newPosts?.length > 0 && setAllBlogs(newPosts)
   }, [allBlogsRedux])
@@ -29,7 +29,7 @@ const NewPosts = () => {
       </div>
       <div className='  flex flex-wrap justify-center gap-5 '>
         {
-          allBlogs.slice(0, 4).map((blog, index) => {
+          allBlogs?.slice(0, 4).map((blog, index) => {
             return (
               blog.title ?
                 <SecondaryCard key={index} blog={blog} />

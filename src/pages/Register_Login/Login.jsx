@@ -43,6 +43,7 @@ const Login = () => {
         }catch(error){
             console.log('Error in login:', error.message)
             toast.error(error.message)
+            setMainBtn('Login')
         }
     }
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm } from "react-hook-form"
 import toast from 'react-hot-toast'
 import { postReq } from '../../api/axios'
@@ -6,16 +6,21 @@ import { postReq } from '../../api/axios'
 
 const Register = () => {
 
+    const [mainBtn, setMainBtn] = useState('Register')
+
 
     // ============ Api ==============
     const handleRegister = async(data)=>{
         try{
+            setMainBtn('Loading...')
             await postReq('/auth/register', data)
             toast.success('User registered successfully')
             console.log(data)
+            setMainBtn('Register')
         }catch(error){
             console.log('error in frontend posting register request: ', error.message)
             toast.error(error.message)
+            setMainBtn('Register')
         }
     }
 
@@ -36,7 +41,7 @@ const Register = () => {
                 <input {...register("email", { required: true })}  placeholder='Email' className='p-2 border border-gray-300 rounded-md'/>
                 <input {...register("password", { required: true })} placeholder='Password' type='password' className='p-2 border border-gray-300 rounded-md'  />
                 {/* {errors.exampleRequired && <span>This field is required</span>} */}
-                <input type="submit" value={'Register'} className='cursor-pointer bg-[var(--primaryColor)] p-2 rounded-md text-white border-none' />
+                <input type="submit" value={mainBtn} className='cursor-pointer bg-[var(--primaryColor)] p-2 rounded-md text-white border-none' />
             </form>
 
         </div>
