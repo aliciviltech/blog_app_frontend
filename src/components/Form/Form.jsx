@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import FullButton from '../Buttons/FullButton';
 import { storeBlogs } from '../../redux/reducers/blogReducer';
-import { postReq, putReq } from '../../api/axios';
+import { getReq, postReq, putReq } from '../../api/axios';
 
 
 const FormComponent = ({ type, blogData, setShowForm }) => {
@@ -27,6 +27,16 @@ const FormComponent = ({ type, blogData, setShowForm }) => {
   const activeUserRedux = useSelector(state => state.userReducer.activeUser);
   // extracting all blogs from redux
   const allBlogsRedux = useSelector(state => state.blogReducer.allBlogs);
+  // getting blogs from data base
+  const dataBaseBlogs = async()=>{
+    try{
+      const response = await getReq('/blogs');
+      dispatch(storeBlogs(response.data.data))
+      console.log(response)
+    }catch(error){
+      console.log("error getting blogs: ", error)
+    }
+  }
 
 
   // summary letter count
@@ -44,9 +54,9 @@ const FormComponent = ({ type, blogData, setShowForm }) => {
   } = useForm()
   useEffect(() => {
     if (type == 'edit') {
-      const { _id, ...newBlogData } = blogData;
-      console.log(newBlogData)
-      reset(newBlogData)
+      const { _id, ...otherFields } = blogData;
+      console.log(blogData)
+      reset(otherFields)
     }
   }, [])
 
@@ -59,9 +69,9 @@ const FormComponent = ({ type, blogData, setShowForm }) => {
       if (editorRef.current) {
         const text = editorRef.current.getContent({ format: 'text' })
         let totalWords = text.trim().split(/\s+/).length;
-        if (data.summary.trim().length < 200) {
-          // toast.error('Blog summary shall be atleast 200 characters long')
-          reject('Blog summary shall be atleast 200 characters long')
+        if (data.summary.trim().length < 120) {
+          // toast.error('Blog summary shall be atleast 120 characters long')
+          reject('Blog summary shall be atleast 120 characters long')
         } else if (totalWords < 100) {
           // toast.error('Blog shall not be less than 100 words')
           reject("Blog shall not be less than 100 words");
@@ -107,15 +117,12 @@ const FormComponent = ({ type, blogData, setShowForm }) => {
     const finalBlogData = {
       ...data,
       blog_content: editorRef.current.getContent(),
-      user_name: activeUserRedux?.name,
-      user_id: activeUserRedux?._id,
-      thumbnail:  thumbnail,
-      user_image: activeUserRedux.user_image,
+      thumbnail:  thumbnailUrl,
     }
     // update api
     try {
       const response = await putReq(`/blogs/update-blog/${_id}`, finalBlogData);
-      // dispatch(storeBlogs([...allBlogsRedux, finalBlogData]))
+      dataBaseBlogs()
       console.log(response)
       toast.success('Blog updated successfully')
       setShowForm(false) 
@@ -190,7 +197,7 @@ const FormComponent = ({ type, blogData, setShowForm }) => {
         <label className='opacity-[0.7]'>Blog Title:</label>
         <input {...register("title", { required: true })} placeholder='Enter blog title' className='p-2 border border-gray-300 rounded-md' />
         <p>Write a blog introduction, which will appear in thumbnail/preview of blog. {`(minimum 200 characters long.)`} </p>
-        <textarea {...register("summary", { required: true })} minLength={200} placeholder='wirte a blog summary/introduction/context' className='resize-none p-2 border border-gray-300 rounded-md' onChange={handleSummaryCount} ></textarea>
+        <textarea {...register("summary", { required: true })} minLength={120} placeholder='wirte a blog summary/introduction/context' className='resize-none p-2 border border-gray-300 rounded-md' onChange={handleSummaryCount} ></textarea>
         <p className='text-right text-[12px] m-0 p-0 ' >Summary letter count: {summaryCount}</p>
 
         {

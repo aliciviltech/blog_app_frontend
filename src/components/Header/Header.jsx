@@ -27,6 +27,7 @@ const Header = () => {
     localStorage.clear('user')
     toast('Logout successful')
     navigate('/')
+    // location.reload()
   }
 
 

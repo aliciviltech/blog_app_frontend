@@ -3,8 +3,9 @@ import { useForm } from "react-hook-form"
 import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { postReq } from '../../api/axios';
+import { getReq, postReq } from '../../api/axios';
 import { clearUser, storeUser } from '../../redux/reducers/userReducer';
+import { storeBlogs } from '../../redux/reducers/blogReducer';
 
 
 const Login = () => {
@@ -15,8 +16,8 @@ const Login = () => {
     const navigate = useNavigate();
    
     // ============ redux functions ==========
-    // const userInRedux = useSelector(state=>state.userReducer);
     const dispatch = useDispatch()
+ 
 
     // ============ user login data =============
     const userInStorage = localStorage.getItem('user') !== 'undefined' ? JSON.parse(localStorage.getItem('user')) : null
@@ -36,7 +37,8 @@ const Login = () => {
             setUser(response.data.user);
             localStorage.setItem('user', JSON.stringify(response.data.user));
             dispatch(storeUser(response.data.user))
-            navigate('/user-dashboard/my-posts')
+            // navigate('/user-dashboard/my-posts')
+            navigate(-1)
 
         }catch(error){
             console.log('Error in login:', error.message)
@@ -50,6 +52,7 @@ const Login = () => {
         localStorage.clear('user')
         toast('Logout successful')
         setUser(null)
+        // dataBaseBlogs()
     }
 
     // ============ hook form ==============

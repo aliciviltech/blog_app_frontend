@@ -1,9 +1,11 @@
 .PopularSection .slick-track{
-    justify-content: center !important;
+    /* justify-content: center !important; */
     padding-bottom: 50px;
+    gap: 20px;
 }
+
 .PopularSection .slick-dots{
-    color: red;
+    display: flex !important;
 }
 
 .PopularSection .slick-arrow{

@@ -21,6 +21,7 @@ import CategoryPage from './pages/CategoryPage/CategoryPage'
 import CategoriesList from './pages/CategoryPage/CategoriesList'
 import PopularPosts from './pages/PopularPosts/PopularPosts'
 import { useSelector } from 'react-redux'
+import AllPostsPage from './pages/AllPostsPage/AllPostsPage'
 
 const App = () => {
   console.log('this is logged in app compoenent')
@@ -28,11 +29,12 @@ const App = () => {
   // ======================= redux functions ===========================
     const AllBlogsRedux = useSelector(state=>state.blogReducer.allBlogs);
     const activeUserRedux = useSelector(state=>state.userReducer.activeUser)
+    console.log(AllBlogsRedux)
 
   return (
     <div>
       {
-        (AllBlogsRedux.length==0 || activeUserRedux == {}) &&
+        (AllBlogsRedux?.length==0 || activeUserRedux == {}) &&
         <Data/>
       }
       <Toaster />
@@ -60,6 +62,7 @@ const App = () => {
         <Route path='/categories/:cat' element={<CategoryPage/>} />
         <Route path='/categories' element={<CategoriesList/>} />
         <Route path='/popular-posts' element={<PopularPosts/>} />
+        <Route path='/all-posts' element={<AllPostsPage/>} />
 
         <Route path='*' element={<PageNotFound/>} />
 

@@ -51,8 +51,7 @@ const PopularSection = () => {
         <h1 className='H4'>Popular Posts</h1>
         <Link to={'/popular-posts'} className='underline'>See all</Link>
         </div>
-        <Carousel className=' flex gap-[20px] flex-wrap justify-center'
-        {...carouselSetting}>
+        <Carousel className='' {...carouselSetting}>
         {
             allBlogs.map((blog, index)=>{
                 return(
