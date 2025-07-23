@@ -5,14 +5,15 @@ import { getReq, putReq } from '../../api/axios'
 import { storeBlogs } from '../../redux/reducers/blogReducer'
 import { Bookmark, BookmarkCheck } from 'lucide-react'
 import toast from 'react-hot-toast'
+import SpinnerLoader from '../Loader/SpinnerLoader'
 
 const MarkButton = ({ blog, size = 'small' }) => {
 
     const dispatch = useDispatch()
+    const [loader, setLoader] = useState(false)
 
     // ================= active user redux ====================
     const activeUserRedux = useSelector(state => state.userReducer.activeUser)
-    console.log(activeUserRedux._id)
 
     // ================== getting blogs from data base =====================
     const dataBaseBlogs = async () => {
@@ -28,7 +29,7 @@ const MarkButton = ({ blog, size = 'small' }) => {
     // =================== handle mark button ===================
     const [marked, setMarked] = useState(false);
     const showMarked = () => {
-        blog?.marked_by.forEach((el) => {
+        blog?.marked_by?.forEach((el) => {
             el.user_id == activeUserRedux._id && setMarked(true)
         })
     }
@@ -40,25 +41,34 @@ const MarkButton = ({ blog, size = 'small' }) => {
     const handleMark = async (e) => {
         if (activeUserRedux._id) {
             e.stopPropagation();
-            setMarked(!marked)
             try {
-                marked ?
+                setLoader(true)
+                if (marked) {
                     await putReq(`/blogs/update-blog/${blog._id}`, { $pull: { marked_by: { user_id: activeUserRedux._id } } })
-                    :
+                    await dataBaseBlogs()
+                    setMarked(false)
+                    setLoader(false)
+                    console.log('Removed')
+                } else {
                     await putReq(`/blogs/update-blog/${blog._id}`, { $addToSet: { marked_by: { user_id: activeUserRedux._id } } })
-                await dataBaseBlogs()
+                    await dataBaseBlogs()
+                    setMarked(true)
+                    setLoader(false)
+                    console.log('Marked')
+                }
             } catch (error) {
+                setLoader(false)
                 console.log(error)
             }
-        }else{
+        } else {
             e.stopPropagation();
             toast.error('Please login to save blogs')
         }
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         !activeUserRedux._id && setMarked(false)
-    },[activeUserRedux])
+    }, [activeUserRedux])
 
 
     return (
@@ -67,8 +77,17 @@ const MarkButton = ({ blog, size = 'small' }) => {
                 size == 'small' &&
                 <>
                     {
-                        marked ? <div title='Un Mark Blog'><BookmarkCheck color='#42f581' size='30px' onClick={handleMark} /></div>
-                            : <div title='Mark Blog'><Bookmark onClick={handleMark} /></div>
+                        loader ? <SpinnerLoader />
+                            :
+                            <>
+                                {
+                                    marked ?
+
+                                        <div title='Un Mark Blog'><BookmarkCheck color='#42f581' size='30px' onClick={handleMark} /></div>
+                                        :
+                                        <div title='Mark Blog'><Bookmark onClick={handleMark} /></div>
+                                }
+                            </>
                     }
                 </>
 

@@ -6,6 +6,8 @@ const getReq = async(path)=>{
         return response;
     } catch(error){
         console.log(error)
+        throw new Error(error);
+        
     }
 }
 

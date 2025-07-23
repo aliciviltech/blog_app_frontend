@@ -9,7 +9,7 @@ import PagesDrawer from '../Drawers/PagesDrawer';
 import CategoriesDrawer from '../Drawers/CategoriesDrawer';
 import SearchComponent from '../SearchComponent/SearchComponent';
 
-const Header = () => {
+const Header = ({ searchBar=true }) => {
 
   const navigate = useNavigate()
   const drawerRef = useRef(null)
@@ -21,13 +21,14 @@ const Header = () => {
   const activeUserRedux = useSelector(state => state.userReducer.activeUser)
   const dispatch = useDispatch()
 
+
+
   // ========== handle logout ===========
   const handleLogout = () => {
     dispatch(clearUser())
-    localStorage.clear('user')
+    // localStorage.clear('user')
     toast('Logout successful')
     navigate('/')
-    // location.reload()
   }
 
 
@@ -49,7 +50,6 @@ const Header = () => {
   // menu bar
   const [showMenu, setShowMenu] = useState(false);
   const handleShowMenu = () => {
-    console.log('function running', showMenu)
     setShowMenu(!showMenu);
   }
   // navigation anchor drawerrs
@@ -102,7 +102,7 @@ const Header = () => {
 
 
   return (
-    <div className='Header select-none relative sm:mb-[70px] mb-[30px] lg:mb-[30px] px-2 flex lg:gap-10 justify-between items-center mt-8 max-w-[1300px] mx-auto'>
+    <div className='Header select-none relative mb-[80px] lg:mb-[30px] px-2 flex lg:gap-10 justify-between items-center mt-8 max-w-[1300px] mx-auto'>
 
       {/* ======================== left side =============================== */}
       <div className="leftSide lg:w-[50%] flex gap-6 items-center">
@@ -130,7 +130,7 @@ const Header = () => {
           </div>
 
           <div className='pages relative flex flex-col  lg:items-center border-b border-white px-4 py-2 lg:border-none lg:p-0'>
-            <div className='flex items-center cursor-pointer' onClick={() => showDrawersF('pages')}>Pages<ChevronDown  size={20} /></div>
+            <div className='flex items-center cursor-pointer' onClick={() => showDrawersF('pages')}>Pages<ChevronDown size={20} /></div>
             {showDrawer.pages && <PagesDrawer />}
           </div>
 
@@ -143,14 +143,17 @@ const Header = () => {
       <div className="rightSide sm:grow-[0] lg:w-[40%] flex gap-6 items-center justify-between">
 
         {/* search bar */}
-        <div className="search hidden sm:block">
-          <SearchComponent />
-        </div>
+        {
+          searchBar &&
+          <div className="search sm:block">
+            <SearchComponent />
+          </div>
+        }
 
 
         {/* user info */}
         {
-          activeUserRedux.name ?
+          activeUserRedux?.name ?
             <div ref={userDrawerRef} className="user relative sm:flex gap-2 items-center cursor-pointer" onClick={handleUserDrawer} >
               {
                 activeUserRedux.user_image ?

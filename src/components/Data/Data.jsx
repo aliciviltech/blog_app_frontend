@@ -6,7 +6,6 @@ import { getByIdReq, getReq } from '../../api/axios'
 
 const Data = () => {
   
-    console.log('Checking Data component')
 
     // ======================= redux functions ===========================
     const dispatch = useDispatch()
@@ -16,13 +15,17 @@ const Data = () => {
   
     // =================== fetch all blogs from mongoDB ====================
     const fetchBlogs = async()=>{
-        const allBlogs = await getReq('/blogs')
-        dispatch(storeBlogs(allBlogs?.data.data))
+        try{
+            const allBlogs = await getReq('/blogs')
+            dispatch(storeBlogs(allBlogs?.data.data))
+        }catch(err){
+            console.log(err)
+            
+        }
     }
     useEffect(()=>{
         if(AllBlogsRedux.length==0 || activeUserRedux=={}){
             fetchBlogs()
-            console.log('data component fetch block')
         }
     },[])
 

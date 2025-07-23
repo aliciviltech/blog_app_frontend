@@ -5,59 +5,70 @@
 
 
 @font-face {
-    font-family: 'poppins-regular' ;
+    font-family: 'poppins-regular';
     src: url('/fonts/poppins/Poppins-Regular.ttf');
 }
+
 @font-face {
-    font-family: 'poppins-light' ;
+    font-family: 'poppins-light';
     src: url('/fonts/poppins/Poppins-Light.ttf');
 }
 
-:root{
+:root {
     --primaryColor: #F81539;
     --secondaryColor: #FC4308;
-    --bgPrimary:#F5F5F5;
+    --bgPrimary: #F5F5F5;
 }
-.H1{
+
+.H1 {
     font-weight: 500;
     font-size: 36px;
     line-height: 52px;
 }
 
-.H4{
+.H4 {
     font-weight: 500;
     font-size: 22px;
 }
-.H5{
+
+.H5 {
     font-weight: 500;
     font-size: 16px;
 }
-.H6{
+
+.H6 {
     font-weight: 400;
     font-size: 14px;
 }
-.P2{
+
+.P2 {
     font-size: 14px;
     color: #3E3232;
 }
-.P3{
+
+.P3 {
     font-size: 12px;
     color: #3E3232;
 }
-.black50{
+
+.black50 {
     color: #757575;
 }
 
-body{
+body {
     overflow-x: hidden;
 }
 
+.pagePadding {
+    padding: 20px;
+}
 
-.skeletonContainer{
+.skeletonContainer {
     width: 100%;
     height: 100%;
 }
-.skeletonContainer .skeleton{
+
+.skeletonContainer .skeleton {
     width: 100%;
     height: 100%;
     font-family: 'Courier New', Courier, monospace
@@ -67,8 +78,12 @@ body{
 
 
 @media screen and (max-width:640px) {
-    .H4{
+    .H4 {
         font-weight: 500;
         font-size: 16px;
+    }
+
+    .pagePadding {
+        padding: 5px;
     }
 }

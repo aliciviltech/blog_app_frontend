@@ -60,11 +60,12 @@ const AddPost = () => {
           try{
             setMainBtn('Loading...')
             const response = await postReq('/blogs/post-blog',saveBlog);
-            dispatch(storeBlogs([...allBlogsRedux,saveBlog]))
+            dispatch(storeBlogs([...allBlogsRedux,response.data.data]))
             console.log(response) 
             toast.success('Blog posted successfully')
             setMainBtn('Post')
           }catch(error){
+            setMainBtn('Post')
             toast.error(error.message)
             console.log('Error in posting blog at AddPost: ',error)
           }

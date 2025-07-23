@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { CircleX, Delete, DeleteIcon, PenBox, Pencil, Trash, Trash2, TrashIcon } from 'lucide-react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import SecondaryCard from '../../../components/Cards/SecondaryCard';
 import FitButton from '../../../components/Buttons/FitButton';
 import { Form, useNavigate } from 'react-router';
@@ -8,10 +8,12 @@ import FormComponent from '../../../components/Form/Form';
 import { deleteReq } from '../../../api/axios';
 import toast from 'react-hot-toast';
 import DeletingLoader from '../../../components/Loader/DeletingLoader';
+import { deleteBlog } from '../../../redux/reducers/blogReducer';
 
 const AllPosts = () => {
 
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   // ================== edit blog ====================
   const [showForm, setShowForm] = useState(false)
@@ -27,6 +29,7 @@ const AllPosts = () => {
     setDeleting(true)
     try {
       await deleteReq(`/blogs/delete-blog/${id}`)
+      dispatch(deleteBlog(id))
       toast.success(`Blog deleted`)
       setDeleting(false)
     } catch (error) {

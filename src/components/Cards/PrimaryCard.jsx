@@ -29,7 +29,7 @@ const PrimaryCard = ({ blog }) => {
   // =================== handle mark button ===================
   const [marked, setMarked] = useState(false);
   const showMarked = ()=>{
-    blog.marked_by.forEach((el)=>{
+    blog?.marked_by?.forEach((el)=>{
       el.user_id == activeUserRedux._id && setMarked(true)
     })
   }

@@ -37,9 +37,9 @@ const Register_Login = () => {
 
   return (
     <>
-    <Header/>
-    <div className='Register_Login min-h-[calc(100vh-120px)] flex items-center'>
-        <div className="content w-[600px] mx-auto shadow-2xl rounded-lg p-4">
+    <Header searchBar={false}/>
+    <div className='Register_Login min-h-[calc(100vh-120px)] flex items-center bg-gray-200 p-2'>
+        <div className="content bg-white w-[400px] mx-auto shadow-2xl rounded-lg p-4">
         <Tabs activeKey={defaultTab} items={items} animated={true} onChange={handleTabChange} />
         </div>
     </div>

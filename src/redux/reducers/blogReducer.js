@@ -9,8 +9,9 @@ const blogSlice = createSlice({
     initialState,
     reducers: {
         storeBlogs: (state, {payload})=> {state.allBlogs = payload},
+        deleteBlog: (state, {payload})=> {state.allBlogs = state.allBlogs.filter(blog=>blog._id != payload)},
     }
 })
 
-export const {storeBlogs} = blogSlice.actions;
+export const {storeBlogs, deleteBlog} = blogSlice.actions;
 export default blogSlice.reducer;

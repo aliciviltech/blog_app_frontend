@@ -117,7 +117,7 @@ const FormComponent = ({ type, blogData, setShowForm }) => {
     const finalBlogData = {
       ...data,
       blog_content: editorRef.current.getContent(),
-      thumbnail:  thumbnailUrl,
+      thumbnail:  thumbnailUrl || thumbnail,
     }
     // update api
     try {

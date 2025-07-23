@@ -9,7 +9,7 @@ const MarkedPosts = () => {
   const activeUserRedux = useSelector(state=>state.userReducer.activeUser)
 
   const markedBlogs = allBlogsRedux?.filter((blog) =>
-    blog.marked_by.some((mark)=> mark.user_id == activeUserRedux._id)
+    blog.marked_by?.some((mark)=> mark.user_id == activeUserRedux._id)
   )
 
 
@@ -19,7 +19,7 @@ const MarkedPosts = () => {
       {
         markedBlogs?.map((blog)=>{
           return(
-            <SecondaryCard blog={blog} />
+            <SecondaryCard key={blog._id} blog={blog} />
           )
         })
       }
