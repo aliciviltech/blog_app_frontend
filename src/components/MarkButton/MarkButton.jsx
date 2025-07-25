@@ -98,11 +98,17 @@ const MarkButton = ({ blog, size = 'small' }) => {
                     {
                         marked ?
                             <div className='bg-black text-white px-4 py-2 rounded-md flex gap-2 cursor-pointer items-center' title='Un Mark Blog'>
-                                Unsave <BookmarkCheck color='#42f581' size='25px' onClick={handleMark} />
+                                {
+                                    loader ? 'discarding...'
+                                    : <> Unsave <BookmarkCheck color='#42f581' size='25px' onClick={handleMark} /> </>
+                                }
                             </div>
                             :
                             <div className='bg-black text-white px-4 py-2 rounded-md flex gap-2 cursor-pointer items-center' title='Un Mark Blog'>
-                                Save  <Bookmark size='30px' onClick={handleMark} />
+                                {
+                                    loader ? 'saving...'
+                                    : <> Save  <Bookmark size='30px' onClick={handleMark} /> </>
+                                }
                             </div>
                     }
                 </>

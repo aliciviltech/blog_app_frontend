@@ -3,6 +3,7 @@ import { auth, provider, signInWithPopup } from '../../Firebase/firebaseConfig.j
 import { useDispatch } from 'react-redux'
 import { storeUser } from '../../redux/reducers/userReducer.js'
 import { useNavigate } from 'react-router'
+import { postReq } from '../../api/axios.js'
 
 const GoogleSignin = ({text}) => {
 
@@ -14,7 +15,8 @@ const GoogleSignin = ({text}) => {
         // =============================== google signin ===========================
     const signinGoogle = () => {
         signInWithPopup(auth, provider)
-            .then((result) => {
+            .then(async(result) => {
+                console.log(result.user)
                 const {email, displayName, uid, photoURL}= result.user
                 const user = {
                     email: email,
@@ -23,11 +25,14 @@ const GoogleSignin = ({text}) => {
                     _id: uid
                 }
                 // setUser(user);
-                localStorage.setItem('user', JSON.stringify(user));
-                dispatch(storeUser(user))
-                navigate('/')
-                
-
+                try{
+                    const response = await postReq('/auth/google-signin',{email, displayName, uid, photoURL})
+                    console.log(response)
+                    dispatch(storeUser(response.data.data))
+                    navigate('/')
+                }catch(error){
+                    console.log(error)
+                }
 
             }).catch((error) => {
                 const errorMessage = error.message;

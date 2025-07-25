@@ -13,7 +13,7 @@ const useQuery = () => {
 
 const SearchPage = () => {
 
-  const [loader, setLoader] = useState(true)
+  const [loader, setLoader] = useState(false)
   const query = useQuery().get('query')
   const [blogs, setBlogs] = useState([])
   const searchBlogs = async () => {
@@ -39,7 +39,12 @@ const SearchPage = () => {
     <>
       <Header />
       <div className="searchPage pagePadding">
+        {
+          loader?
+        <h1 className='my-10'>Searching for <span className='font-bold'>{query} . . . </span> </h1>
+          :
         <h1 className='my-10'>Search results for: <span className='font-bold'>{query}</span> </h1>
+        }
         {
           loader ?
             <SecondaryLoader />

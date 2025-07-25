@@ -37,7 +37,8 @@ const UserDashboard = () => {
             dispatch(storeBlogs(allBlogsRedux))
             toast.success('User data updated successfully')
         } catch (error) {
-            toast.error(error.message)
+            console.log(activeUserRedux)
+            console.log(error.message)
         }
     }
     // ============ update user image ============
