@@ -99,13 +99,13 @@ const UserDashboard = () => {
     if(loading) return 'Loading...'
 
     return (
-        <>
+        <div className='min-h-screen dark:bg-primaryDarkBg dark:text-gray-500'>
             <Header />
 
             {
                 activeUserRedux._id ?
 
-                    <div className='UserDashboard w-[100%] mx-auto dark:bg-primaryDarkBg'>
+                    <div className='UserDashboard w-[100%] mx-auto '>
 
                         <Breadcrumb />
 
@@ -146,7 +146,7 @@ const UserDashboard = () => {
                 }
 
             </div>
-        </>
+        </div>
     )
 }
 

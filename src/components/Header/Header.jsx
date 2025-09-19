@@ -118,7 +118,7 @@ const Header = ({ searchBar = true }) => {
 
   return (
     <div className='bg-white dark:bg-primaryDarkBg transition-all'>
-    <div className='Header  select-none relative mb-[80px] lg:mb-[0] px-2 flex lg:gap-10 justify-between items-center py-8 max-w-[1300px] mx-auto transition-all'>
+    <div className={`Header  select-none relative ${searchBar && 'mb-[80px]'}  lg:mb-[0] px-2 flex lg:gap-10 justify-between items-center py-8 max-w-[1300px] mx-auto transition-all`}>
 
       {/* ======================== left side =============================== */}
       <div className="leftSide lg:w-[50%] flex gap-6 items-center">

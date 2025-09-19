@@ -42,7 +42,7 @@ const App = () => {
   },[])
 
   return (
-    <div>
+    <div className="dark:bg-primaryDarkBg">
       {
         (AllBlogsRedux?.length === 0 || Object.keys(activeUserRedux || {}).length === 0) &&
         <Data />
