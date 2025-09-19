@@ -22,6 +22,7 @@ const Hero = () => {
         navigate(`/read-blog?id=${id}`)
     }
 
+    // ===================  =================
 
     return (
         <>
