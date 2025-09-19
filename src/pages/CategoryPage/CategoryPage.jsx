@@ -19,7 +19,7 @@ const CategoryPage = () => {
   const categoryBlogs = allBlogsRedux?.filter((blog) => blog.category == cat)
   console.log(categoryBlogs)
   return (
-    <>
+    <div className='dark:bg-primaryDarkBg dark:text-gray-500 pb-10'>
       <Header />
       <Breadcrumb />
       {
@@ -39,7 +39,7 @@ const CategoryPage = () => {
           :
           <div>All categories</div>
       }
-    </>
+    </div>
   )
 }
 

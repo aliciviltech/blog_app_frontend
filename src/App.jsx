@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Home from './pages/Home/Home'
 import { Route, Routes } from 'react-router'
 import { routes } from './routes/routes'
@@ -13,6 +13,7 @@ import AddPostAdmin from './pages/AdminDashboard/AddPostAdmin/AddPostAdmin'
 import MarkedPostsAdmin from './pages/AdminDashboard/MarkedPostsAdmin/MarkedPostsAdmin'
 import Register_Login from './pages/Register_Login/Register_Login'
 import { Toaster } from 'react-hot-toast'
+import { Slide, ToastContainer } from 'react-toastify'
 import Data from './components/Data/Data'
 import AllPosts from './pages/UserDashboard/AllPosts/AllPosts'
 import BlogDetail from './pages/BlogDetail/BlogDetail'
@@ -20,23 +21,34 @@ import EditPost from './pages/UserDashboard/EditPost/EditPost'
 import CategoryPage from './pages/CategoryPage/CategoryPage'
 import CategoriesList from './pages/CategoryPage/CategoriesList'
 import PopularPosts from './pages/PopularPosts/PopularPosts'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import AllPostsPage from './pages/AllPostsPage/AllPostsPage'
 import SearchPage from './pages/SearchPage/SearchPage'
+import { setBlogLoading } from './redux/reducers/blogReducer'
+import Footer from './components/Footer/Footer'
 
 const App = () => {
 
+  const dispatch = useDispatch()
+
   // ======================= redux functions ===========================
-  const AllBlogsRedux = useSelector(state => state.blogReducer.allBlogs);
-  const activeUserRedux = useSelector(state => state.userReducer.activeUser)
+  const AllBlogsRedux = useSelector(state => state.blogReducer?.allBlogs);
+  const activeUserRedux = useSelector(state => state.userReducer?.activeUser)
+
+  useEffect(()=>{
+    if(AllBlogsRedux?.length>0){
+      dispatch(setBlogLoading(false))
+    }
+  },[])
 
   return (
     <div>
       {
-        (AllBlogsRedux?.length == 0 || activeUserRedux == {}) &&
+        (AllBlogsRedux?.length === 0 || Object.keys(activeUserRedux || {}).length === 0) &&
         <Data />
       }
-      <Toaster />
+      {/* <Toaster /> */}
+      <ToastContainer position='top-center' transition={Slide} autoClose={2000} />
       <Routes>
         {/* {
           routes.map((route)=>{
@@ -69,6 +81,7 @@ const App = () => {
 
 
       </Routes>
+      <Footer/>
     </div>
   )
 }

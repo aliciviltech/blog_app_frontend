@@ -4,7 +4,7 @@ const AuthorTag = ({authorImage=null, authorName, date}) => {
     const colors = ["#eb4034", "#520a05", "#076ca3", "#1f7d5f", "#ad1a9f", "#ad971a"];
     const randomColor = colors[Math.floor(Math.random()*6)]
     return (
-        <div className='AuthorTag bg-[var(--bgPrimary)] p-2.5 rounded-lg flex gap-2.5'>
+        <div className='AuthorTag bg-[var(--bgPrimary)] dark:bg-primaryDarkBg dark:text-white p-2.5 rounded-lg flex gap-2.5'>
             <div className="imageContainer">
                 {
                     authorImage ?
@@ -15,7 +15,7 @@ const AuthorTag = ({authorImage=null, authorName, date}) => {
             </div>
             <div className="text flex flex-col gap-1">
                 <h1 className='H6'>{authorName}</h1>
-                <p className='P3'>{date}</p>
+                <p className='P3 dark:text-gray-400'>{date}</p>
             </div>
         </div>
     )

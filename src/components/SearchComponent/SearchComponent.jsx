@@ -31,7 +31,7 @@ const SearchComponent = () => {
 
 
   return (
-    <div className="search w-full absolute top-[60px] lg:static left-0 md:w-screen lg:w-fit flex bg-[#F5F5F5] p-4 py-3.5 rounded-[12px]">
+    <div className="search w-full absolute top-[115px] lg:static left-0 md:w-screen lg:w-fit flex bg-[#F5F5F5] dark:bg-cardDarkBg dark:text-white p-4 py-3.5 rounded-[12px] transition-all">
       <input type="text" className='w-full bg-transparent outline-none px-1' placeholder='Search blog or author' value={input} onChange={handleInput} onKeyDown={handleSearch} />
       <Search size={20} onClick={handleSearch} />
     </div>

@@ -6,10 +6,13 @@ import MyPostsAdmin from './MyPostsAdmin/MyPostsAdmin'
 import AddPostAdmin from './AddPostAdmin/AddPostAdmin'
 import MarkedPostsAdmin from './MarkedPostsAdmin/MarkedPostsAdmin'
 import AllPosts from './AllPosts/AllPosts'
+import { useSelector } from 'react-redux'
 
 const AdminDashboard = () => {
 
     const navigate = useNavigate();
+
+    const {allBlogs, loading} = useSelector(state=> state.blogReducer)
 
     // ============ setting active tab from location ===============
     const location = useLocation();
@@ -23,6 +26,7 @@ const AdminDashboard = () => {
         navigate(`/admin-dashboard/${endPoint}`);
     }
 
+    if(loading) return 'Loading...'
 
     return (
         <>

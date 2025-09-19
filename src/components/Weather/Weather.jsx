@@ -37,7 +37,7 @@ const Weather = () => {
     // console.log(allWeatherData)
 
     return (
-        <div className='Weather min-h-screen sm:min-h-[unset] xl:min-h-screen
+        <div className='Weather max-w-[1400px] mx-auto max-h-[700px] h-screen sm:h-[unset] xl:h-screen
         bg-[url("https://cdn.pixabay.com/photo/2018/01/14/23/12/nature-3082832_1280.jpg")]
         bg-no-repeat bg-cover bg-bottom bg-blend-color bg-black/50
          py-12 px-6 flex gap-6 justify-center '>
@@ -93,7 +93,7 @@ const Weather = () => {
 
 
             {/* right side */}
-            <div className="rightSide hidden text-white text-[1vmin] w-fit justify-end xl:w-1/2 sm:flex flex-wrap gap-2">
+            <div className="rightSide hidden text-white w-fit justify-end xl:w-1/2 sm:flex flex-wrap gap-2">
 
                 {weatherData.length > 0 ?
                     weatherData?.slice(1, 5).map((weather, index) => {
@@ -104,9 +104,9 @@ const Weather = () => {
                                         index === 2 ? 'hidden xl:flex bg-gradient-to-r from-violet-500/50 to-fuchsia-500/50' :
                                             'hidden xl:flex bg-gradient-to-r from-red-400/50 to-red-700/50'
                                 }
-                            flex flex-col justify-center gap-10 rounded-lg w-full xl:w-[48%] h-1/2 py-8 px-6 `}
+                            flex flex-col justify-center text-[12px] md:text-[16px] gap-10 rounded-lg w-full xl:w-[48%] h-1/2 py-8 px-6 `}
                             >
-                                <div className="row1 text-[1.7vmin] flex justify-between">
+                                <div className="row1 flex justify-between">
                                     <div className="humiditySide">
                                         <p>Precepitation: 2%</p>
                                         <p>Humidity: {weather.main.humidity}%</p>

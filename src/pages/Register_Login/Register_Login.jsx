@@ -11,38 +11,38 @@ const Register_Login = () => {
   // =========== setting default tab on navigation =============
   const [searchParams, setSearchParams] = useSearchParams();
   const [defaultTab, setDefaultTab] = useState(searchParams.get('tab') === 'login' ? '2' : '1');
-  useEffect(()=>{
-    const activeTab = searchParams.get('tab') === 'login' ? '2' : '1'; 
-    setDefaultTab(activeTab); 
-  },[searchParams]) 
+  useEffect(() => {
+    const activeTab = searchParams.get('tab') === 'login' ? '2' : '1';
+    setDefaultTab(activeTab);
+  }, [searchParams])
   // Update URL when tab changes
-  const handleTabChange = (key)=>{
+  const handleTabChange = (key) => {
     setSearchParams({ tab: key === '2' ? 'login' : 'register' });
   }
 
   // =========== tab properties =============
-    const items = [
-        {
-          key: '1',
-          label: 'Register',
-          children: <Register/>,
-        },
-        {
-          key: '2',
-          label: 'Login',
-          children: <Login/>,
-        },
-      ];
+  const items = [
+    {
+      key: '1',
+      label: 'Register',
+      children: <Register />,
+    },
+    {
+      key: '2',
+      label: 'Login',
+      children: <Login />,
+    },
+  ];
 
 
   return (
     <>
-    <Header searchBar={false}/>
-    <div className='Register_Login min-h-[calc(100vh-120px)] flex items-center bg-gray-200 p-2'>
-        <div className="content bg-white w-[400px] mx-auto shadow-2xl rounded-lg p-4">
-        <Tabs activeKey={defaultTab} items={items} animated={true} onChange={handleTabChange} />
+      <Header searchBar={false} />
+      <div className='Register_Login min-h-[calc(100vh-120px)] flex items-center bg-gray-200 dark:bg-primaryDarkBg p-2'>
+        <div className="content bg-white dark:bg-cardDarkBg w-[400px] mx-auto shadow-2xl rounded-lg p-4">
+          <Tabs activeKey={defaultTab} items={items} animated={true} onChange={handleTabChange} />
         </div>
-    </div>
+      </div>
     </>
   )
 }

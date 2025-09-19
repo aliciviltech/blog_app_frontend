@@ -6,6 +6,19 @@
     overflow-x: auto;
     padding: 0 20px;
 }
+.dark .ant-tabs-nav::before {
+    border-color: var(--primaryDarkBg);
+}
+.dark .ant-tabs-tab-btn{
+    color: rgb(107, 106, 106);
+}
+
+.dark .ant-tabs-tab-active .ant-tabs-tab-btn{
+    color: var(--primaryColor) !important;
+}
+.dark .ant-tabs-ink-bar{
+    background-color: var(--primaryColor) !important;
+}
 
 @media screen and (min-width:600px) {
     .ant-tabs-nav {

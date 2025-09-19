@@ -13,7 +13,7 @@ const MarkButton = ({ blog, size = 'small' }) => {
     const [loader, setLoader] = useState(false)
 
     // ================= active user redux ====================
-    const activeUserRedux = useSelector(state => state.userReducer.activeUser)
+    const activeUserRedux = useSelector(state => state.userReducer?.activeUser)
 
     // ================== getting blogs from data base =====================
     const dataBaseBlogs = async () => {
@@ -30,7 +30,9 @@ const MarkButton = ({ blog, size = 'small' }) => {
     const [marked, setMarked] = useState(false);
     const showMarked = () => {
         blog?.marked_by?.forEach((el) => {
-            el.user_id == activeUserRedux._id && setMarked(true)
+            if(el.user_id){
+                el.user_id == activeUserRedux?._id && setMarked(true)
+            }
         })
     }
     useEffect(() => {
@@ -67,7 +69,7 @@ const MarkButton = ({ blog, size = 'small' }) => {
     }
 
     useEffect(() => {
-        !activeUserRedux._id && setMarked(false)
+        !activeUserRedux?._id && setMarked(false)
     }, [activeUserRedux])
 
 
@@ -104,7 +106,7 @@ const MarkButton = ({ blog, size = 'small' }) => {
                                 }
                             </div>
                             :
-                            <div className='bg-black text-white px-4 py-2 rounded-md flex gap-2 cursor-pointer items-center' title='Un Mark Blog'>
+                            <div className='bg-black text-white px-4 py-2 rounded-md flex gap-2 cursor-pointer items-center' title='Mark Blog'>
                                 {
                                     loader ? 'saving...'
                                     : <> Save  <Bookmark size='30px' onClick={handleMark} /> </>

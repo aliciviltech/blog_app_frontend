@@ -6,14 +6,14 @@ import SecondaryCard from '../../components/Cards/SecondaryCard';
 
 const PopularPosts = () => {
   
-  const allBlogsRedux = useSelector(state=>state.blogReducer.allBlogs);
-  const popularBlogs = allBlogsRedux.filter((blog)=>blog.section=='popular')
+  const {allBlogs, loading} = useSelector(state=>state.blogReducer);
+  const popularBlogs = allBlogs.filter((blog)=>blog.section=='popular')
   
 //   ============================= getting blogs from redux ==========================
   
-  
+  // if(loading) return 'Loading...'
     return (
-    <>
+    <div className='dark:text-gray-500 dark:bg-primaryDarkBg'>
     <Header/>
     <Breadcrumb/>
     <div className='flex flex-col flex-wrap gap-10 justify-center items-center'>
@@ -23,7 +23,7 @@ const PopularPosts = () => {
         )
       }
     </div>
-  </>
+  </div>
   )
 }
 

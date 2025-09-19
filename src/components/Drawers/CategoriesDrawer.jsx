@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router'
 
-const CategoriesDrawer = ({closeAllDrawers}) => {
+const CategoriesDrawer = ({closeAllDrawers, className='h-0'}) => {
     // const catList = ['travel', 'health', 'technology', 'food', 'entertainment']
 
     const allBlogsRedux = useSelector(state => state.blogReducer.allBlogs)
@@ -11,8 +11,8 @@ const CategoriesDrawer = ({closeAllDrawers}) => {
 
 
     return (
-        <div className='CategoriesDrawer'>
-            <ul className='lg:absolute top-full left-0 bg-black text-white m-2 border-l border-white lg:border-none p-4 flex flex-col gap-2'>
+        <div className={`CategoriesDrawer lg:absolute top-full left-0 overflow-hidden transition-all  duration-500 ${className}`}>
+            <ul className={` bg-black dark:bg-primaryDarkBg text-white m-2 border-l border-white lg:border-none p-4 flex flex-col gap-2 `}>
                 {
                     categoriesList?.map((cat,index)=>{
                         return(

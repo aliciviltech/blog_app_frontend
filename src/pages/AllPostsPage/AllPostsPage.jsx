@@ -12,7 +12,7 @@ const AllPostsPage = () => {
   
   
     return (
-    <>
+    <div className='dark:text-gray-500 dark:bg-primaryDarkBg'>
     <Header/>
     <Breadcrumb/>
     <div className='flex flex-col flex-wrap gap-10 justify-center items-center'>
@@ -22,7 +22,7 @@ const AllPostsPage = () => {
         )
       }
     </div>
-  </>
+  </div>
   )
 }
 

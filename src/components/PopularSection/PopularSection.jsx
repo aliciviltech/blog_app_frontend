@@ -46,7 +46,7 @@ const PopularSection = () => {
 
   return (
     // py-10 px-10 max-w-[1300px] mx-auto flex justify-center gap-[20px] flex-wrap
-    <div className='PopularSection py-12 px-2 sm:px-0 max-w-[1300px] mx-auto'>
+    <div className='PopularSection py-12 px-2 sm:px-0 max-w-[1300px] mx-auto dark:text-gray-500'>
         <div className='my-2 flex justify-between items-center'>
         <h1 className='H4'>Popular Posts</h1>
         <Link to={'/popular-posts'} className='underline'>See all</Link>

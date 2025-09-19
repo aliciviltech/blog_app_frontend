@@ -88,12 +88,12 @@ const AddPost = () => {
 
 
   return (
-    <div className='AddPost py-12 px-4'>
+    <div className='AddPost py-12 px-4 dark:text-gray-300'>
       Add Post componenet
 
-      <form className='flex my-4 flex-col gap-2' >
-        <input {...register("user_name", { required: true })} placeholder='Enter your name' className='p-2 border border-gray-300 rounded-md' />
-        <select {...register("category", { required: true })} className='p-2 border border-gray-300 rounded-md'>
+      <form className='flex my-4 flex-col gap-2 ' >
+        <input {...register("user_name", { required: true })} placeholder='Enter your name' className='p-2 border border-gray-300 rounded-md dark:border-gray-600 dark:bg-primaryDarkBg' />
+        <select {...register("category", { required: true })} className='p-2 border border-gray-300 rounded-md dark:border-gray-600 dark:bg-primaryDarkBg'>
           <option value="" disabled selected>Select blog category</option>
           <option value="travel">Travel</option>
           <option value="health">Health</option>
@@ -103,9 +103,9 @@ const AddPost = () => {
           <option value="education">Education</option>
           <option value="entertainment">Entertainment</option>
         </select>
-        <input {...register("title", { required: true })} placeholder='Enter blog title' className='p-2 border border-gray-300 rounded-md' />
+        <input {...register("title", { required: true })} placeholder='Enter blog title' className='p-2 border border-gray-300 rounded-md dark:border-gray-600 dark:bg-primaryDarkBg' />
         <p>Write a blog introduction, which will appear in thumbnail/preview of blog. {`(minimum 120 characters long.)`} </p>
-        <textarea {...register("summary", { required: true })} minLength={120} placeholder='wirte a blog summary/introduction/context' className='resize-none p-2 border border-gray-300 rounded-md' onChange={handleSummaryCount} ></textarea>
+        <textarea {...register("summary", { required: true })} minLength={120} placeholder='wirte a blog summary/introduction/context' className='resize-none p-2 border border-gray-300 rounded-md dark:border-gray-600 dark:bg-primaryDarkBg' onChange={handleSummaryCount} ></textarea>
         <p className='text-right text-[12px] m-0 p-0 ' >Summary letter count: {summaryCount}</p>
         <p>Upload thumbnail image</p>
         <input type="file" {...register("thumbnailImage", { required: true })} onChange={processThumbnailURL} />
@@ -135,7 +135,8 @@ const AddPost = () => {
             'bold italic forecolor | alignleft aligncenter ' +
             'alignright alignjustify | bullist numlist outdent indent | ' +
             'removeformat | help',
-          content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+          content_style: `body {font-family:Helvetica,Arial,sans-serif; font-size:14px; }`,
+          content_css:'AddPost.css'
         }}
       />
       <div className="submitButton mt-4" onClick={submitForm}>

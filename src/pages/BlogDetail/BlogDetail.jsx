@@ -9,6 +9,7 @@ import Breadcrumb from '../../components/Breadcrumb/Breadcrumb';
 import { putReq } from '../../api/axios';
 import { ThumbsUp } from 'lucide-react';
 import MarkButton from '../../components/MarkButton/MarkButton';
+import Footer from '../../components/Footer/Footer';
 
 const BlogDetail = () => {
   const navigate = useNavigate()
@@ -23,7 +24,7 @@ const BlogDetail = () => {
   const allBlogsRedux = useSelector(state => state.blogReducer.allBlogs);
   const currentBlog = allBlogsRedux?.find((blog) => blog._id === id);
   // ================= active user redux ====================
-  const activeUserRedux = useSelector(state => state.userReducer.activeUser)
+  const activeUserRedux = useSelector(state => state.userReducer?.activeUser)
 
 
 
@@ -66,7 +67,7 @@ const BlogDetail = () => {
 
 
   return (
-    <>
+    <div className='dark:text-gray-400 dark:bg-primaryDarkBg'>
       <Header />
       <Breadcrumb />
 
@@ -82,7 +83,7 @@ const BlogDetail = () => {
               <div className="author flex items-center gap-1">
                 <AuthorTag authorName={currentBlog.user_name} authorImage={currentBlog.user_image} date={new Date(currentBlog.createdAt).toLocaleDateString()} />
               </div>
-              <p className='bg-gray-400 w-fit px-2 rounded-sm'>Category: {currentBlog.category}</p>
+              <p className='bg-gray-400 w-fit px-2 rounded-sm text-black'>Category: {currentBlog.category}</p>
               <p className='mt-10'>{htmlParser(currentBlog?.blog_content)}</p>
             </div>
             :
@@ -92,8 +93,9 @@ const BlogDetail = () => {
         }
       </div>
 
+        <Footer/>
 
-    </>
+    </div>
   )
 }
 

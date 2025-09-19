@@ -16,15 +16,8 @@ const GoogleSignin = ({text}) => {
     const signinGoogle = () => {
         signInWithPopup(auth, provider)
             .then(async(result) => {
-                console.log(result.user)
                 const {email, displayName, uid, photoURL}= result.user
-                const user = {
-                    email: email,
-                    name: displayName,
-                    user_image: photoURL,
-                    _id: uid
-                }
-                // setUser(user);
+            
                 try{
                     const response = await postReq('/auth/google-signin',{email, displayName, uid, photoURL})
                     console.log(response)

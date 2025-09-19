@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import { storeBlogs } from '../../redux/reducers/blogReducer'
-import { storeUser } from '../../redux/reducers/userReducer'
+import { setBlogLoading, storeBlogs } from '../../redux/reducers/blogReducer'
+import { setUserLoading, storeUser } from '../../redux/reducers/userReducer'
 import { getByIdReq, getReq } from '../../api/axios'
 
 const Data = () => {
@@ -9,8 +9,8 @@ const Data = () => {
 
     // ======================= redux functions ===========================
     const dispatch = useDispatch()
-    const AllBlogsRedux = useSelector(state=>state.blogReducer.allBlogs);
-    const activeUserRedux = useSelector(state=>state.userReducer.activeUser)
+    const AllBlogsRedux = useSelector(state=>state.blogReducer?.allBlogs);
+    const activeUserRedux = useSelector(state=>state.userReducer?.activeUser)
 
   
     // =================== fetch all blogs from mongoDB ====================
@@ -18,6 +18,7 @@ const Data = () => {
         try{
             const allBlogs = await getReq('/blogs')
             dispatch(storeBlogs(allBlogs?.data.data))
+            dispatch(setBlogLoading(false))
         }catch(err){
             console.log(err)
             
@@ -26,6 +27,8 @@ const Data = () => {
     useEffect(()=>{
         if(AllBlogsRedux.length==0 || activeUserRedux=={}){
             fetchBlogs()
+        }else{
+            dispatch(setBlogLoading(false))
         }
     },[])
 
@@ -36,6 +39,7 @@ const Data = () => {
             const activeUser = JSON.parse(activeUserString);
             const user = await getByIdReq(`auth/get_user/${activeUser._id}`)
             user && dispatch(storeUser(user.data.activeUser))
+            user && dispatch(setUserLoading(false))
             user &&  localStorage.setItem('user',JSON.stringify(user.data.activeUser));
         }
     }

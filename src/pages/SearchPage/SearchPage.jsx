@@ -36,7 +36,7 @@ const SearchPage = () => {
 
 
   return (
-    <>
+    <div className='dark:text-gray-500 dark:bg-primaryDarkBg'>
       <Header />
       <div className="searchPage pagePadding">
         {
@@ -63,7 +63,7 @@ const SearchPage = () => {
             </div>
         }
       </div>
-    </>
+    </div>
   )
 }
 

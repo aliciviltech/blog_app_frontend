@@ -23,10 +23,10 @@ const CategoriesList = () => {
     }
 
     return (
-        <>
+        <div className='dark:bg-primaryDarkBg dark:text-gray-500'>
             <Header />
             <Breadcrumb />
-            <div className='flex flex-wrap justify-center gap-[40px]'>
+            <div className='flex flex-wrap justify-center gap-[40px] py-10'>
                 {   
                     categoriesList.length>0 ?
                     categoriesList.map((cat,index) => {
@@ -45,7 +45,7 @@ const CategoriesList = () => {
                     <SecondaryLoader/>
                 }
             </div>
-        </>
+        </div>
     )
 }
 

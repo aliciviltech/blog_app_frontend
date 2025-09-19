@@ -22,7 +22,7 @@ const NewPosts = () => {
 
 
   return (
-    <div className='NewPosts max-w-[1300px] mx-auto px-2 py-12 sm:px-0'>
+    <div className='NewPosts max-w-[1300px] mx-auto px-2 py-12 sm:px-0 dark:text-gray-500'>
         <div className='my-2 flex justify-between items-center'>
         <h1 className='H4 my-2'>New Posts</h1>
         <Link to={'/all-posts'} className='underline'>See all posts</Link>

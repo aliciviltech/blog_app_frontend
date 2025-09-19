@@ -20,7 +20,7 @@ const UserDashboard = () => {
     const dispatch = useDispatch()
 
     // ============ get all blogs from redux ==============
-    const allBlogsRedux = useSelector(state => state.blogReducer.allBlogs);
+    const {allBlogs, loading} = useSelector(state => state.blogReducer.allBlogs);
 
     // ============ get user data from redux ==============
     const activeUserRedux = useSelector(state => state.userReducer.activeUser);
@@ -34,7 +34,7 @@ const UserDashboard = () => {
                 data: { user_image: data.user_image, }
             })
             dispatch(storeUser(data))
-            dispatch(storeBlogs(allBlogsRedux))
+            dispatch(storeBlogs(allBlogs))
             toast.success('User data updated successfully')
         } catch (error) {
             console.log(activeUserRedux)
@@ -95,6 +95,9 @@ const UserDashboard = () => {
         })
     }
 
+
+    if(loading) return 'Loading...'
+
     return (
         <>
             <Header />
@@ -102,7 +105,7 @@ const UserDashboard = () => {
             {
                 activeUserRedux._id ?
 
-                    <div className='UserDashboard w-[100%] mx-auto '>
+                    <div className='UserDashboard w-[100%] mx-auto dark:bg-primaryDarkBg'>
 
                         <Breadcrumb />
 
