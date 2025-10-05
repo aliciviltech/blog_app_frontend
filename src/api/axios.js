@@ -2,7 +2,9 @@ import apiClient from ".";
 
 const getReq = async (path) => {
     try {
-        const response = await apiClient.get(path);
+        const response = await apiClient.get(path,{
+      withCredentials: true
+    });
         return response;
     } catch (error) {
         console.log(error)
@@ -22,7 +24,9 @@ const getByIdReq = async (path) => {
 
 const postReq = async (path, data) => {
     try {
-        const response = await apiClient.post(path, data);
+        const response = await apiClient.post(path, data, {
+      withCredentials: true
+    });
         return response;
     } catch (error) {
         // console.log("Error:", error.response.data.message)
