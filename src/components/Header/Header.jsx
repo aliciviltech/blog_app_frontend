@@ -101,7 +101,7 @@ const Header = ({ searchBar = true }) => {
 
 
   // ========================= handle theme mode ===================================
-  const [currentMode, setCurrentMode] = useState('light')
+  const [currentMode, setCurrentMode] = useState(localStorage.theme || 'light')
   const handleTheme = () => {
     if (document.documentElement.classList.contains("dark")) {
       document.documentElement.classList.remove("dark");
