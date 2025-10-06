@@ -32,7 +32,7 @@ const Login = () => {
             toast.success('Login Success')
             console.log('login success')
             setMainBtn('Login')
-
+            console.log('this is response', response)
             dispatch(storeUser(response.data.user))
             dispatch(setUserLoading(false))
             // navigate('/user-dashboard/my-posts')
