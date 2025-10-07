@@ -5,10 +5,10 @@ const apiClient = axios.create({
     // baseURL: 'http://localhost:8080/',
     baseURL: 'https://blog-app-backend-pi.vercel.app/',
     timeout:100000,
-    // withCredentials:true,
     headers:{
         "Content-Type": "application/json"
-    }
+    },
+    withCredentials:true,
 })
 
 apiClient.interceptors.response.use((res)=>{
