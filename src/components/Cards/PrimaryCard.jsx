@@ -56,7 +56,7 @@ const PrimaryCard = ({ blog }) => {
   // if(loading || !activeUser) return 'loading...'
 
   return (
-    <div className='PrimaryCard bg-white dark:bg-cardDarkBg dark:text-white self-stretch cursor-pointer' onClick={() => navigate(`/read-blog?id=${blog._id}`)}>
+    <div className='PrimaryCard !h-full bg-white dark:bg-cardDarkBg dark:text-white self-stretch cursor-pointer' onClick={() => navigate(`/read-blog?id=${blog._id}`)}>
       <div className="imageContainer w-full text-center">
         <img className='image w-full h-full object-cover rounded-lg' src={blog.thumbnail} alt='cardImage' />
       </div>

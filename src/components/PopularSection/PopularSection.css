@@ -2,6 +2,7 @@
     /* justify-content: center !important; */
     padding-bottom: 50px;
     gap: 20px;
+    display: flex;
 }
 
 .PopularSection .slick-dots{
