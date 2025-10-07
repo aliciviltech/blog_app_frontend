@@ -58,10 +58,18 @@ const Login = () => {
     const {
         register,
         handleSubmit,
+        reset,
         formState: { errors },
     } = useForm()
     const onSubmit = (data) => handleLogin(data)
 
+    // ================ demo account values ====================
+    const useDemoAccount = ()=>{
+        reset({
+            email:'shafiq@gmail.com',
+            password:'111111'
+        })
+    }
 
     return (
         <div className='Login dark:text-white'>
@@ -71,6 +79,9 @@ const Login = () => {
                     <p>{activeUserRedux.name} is already logged in. <span className='underline text-blue-600 cursor-pointer' onClick={handleLogout}>Logout</span></p>
                     :
                     <form className='flex flex-col gap-2 ' onSubmit={handleSubmit(onSubmit)}>
+                        <div className='P2'><span className='underline cursor-pointer text-blue-500' onClick={useDemoAccount}>Click here</span> to Use Demo Account
+                        <p className='text-gray-500'>For admin account contact whatsapp +923333770803</p>
+                        </div>
                         <input {...register("email", { required: true })} placeholder='Email' className='p-2 border border-gray-300 dark:border-gray-600 rounded-md dark:bg-primaryDarkBg' />
                         <input {...register("password", { required: true })} placeholder='Password' type='password' className='p-2 border border-gray-300 dark:border-gray-600 rounded-md dark:bg-primaryDarkBg' />
                         {/* {errors.exampleRequired && <span>This field is required</span>} */}
